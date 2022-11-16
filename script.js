@@ -115,26 +115,51 @@ function changeRgba(color, mode, productionTotal, colorOpacity) {
 
 function changeRgba(color, mode, value) {
     let rgba = document.getElementById(color).style.backgroundColor;
-    rgba = rgba.substring(5, rgba.length - 1).replace(/ /g, '').split(',');
-    let red = Number(rgba[0]);
-    let green = Number(rgba[1]);
-    let blue = Number(rgba[2]);
-    let opacity = Number(rgba[3]);
-    if (mode == 0) {            // Change red
-        red = value;
-        document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
-    } 
-    else if (mode == 1) {       // Change green
-        green = value;
-        document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
+    if (rgba.includes("rgba")) {
+        rgba = rgba.substring(5, rgba.length - 1).replace(/ /g, '').split(',');
+        let red = Number(rgba[0]);
+        let green = Number(rgba[1]);
+        let blue = Number(rgba[2]);
+        let opacity = Number(rgba[3]);
+        if (mode == 0) {            // Change red
+            red = value;
+            document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
+        } 
+        else if (mode == 1) {       // Change green
+            green = value;
+            document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
+        }
+        else if (mode == 2) {       // Change blue
+            blue = value;
+            document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
+        }
+        else if (mode == 3) {       //Change opacity
+            opacity = value;
+            document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
+        }
     }
-    else if (mode == 2) {       // Change blue
-        blue = value;
-        document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
-    }
-    else if (mode == 3) {       //Change opacity
-        opacity = value;
-        document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
+    else {
+        rgba = rgba.substring(4, rgba.length - 1).replace(/ /g, '').split(',');
+        let red = Number(rgba[0]);
+        let green = Number(rgba[1]);
+        let blue = Number(rgba[2]);
+        let opacity = Number(rgba[3]);
+        if (mode == 0) {            // Change red
+            red = value;
+            document.getElementById(color).style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+        } 
+        else if (mode == 1) {       // Change green
+            green = value;
+            document.getElementById(color).style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+        }
+        else if (mode == 2) {       // Change blue
+            blue = value;
+            document.getElementById(color).style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+        }
+        else if (mode == 3) {       //Change opacity
+            opacity = value;
+            document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
+        }
     }
 }
 
@@ -147,7 +172,9 @@ function buyFirstOpacityGen() {
     setInterval(opacityTotalCheck3);
     setInterval(opacityTotalCheck4);
     setInterval(opacityTotalCheck5);
-    setInterval(RedCheck);
+    setInterval(forRedCheck);
+    setInterval(forMenuCheck);
+
     gen1[4] = 1;
 }
 
@@ -184,7 +211,8 @@ function OpacityTimer() {
     opacity = MoneyTimer(opacity, opacitySec);
     opacityTotal = MoneyTimer(opacityTotal, opacitySec);
     opacityToHTML = Number(opacity.toFixed(3));
-    changeRgba("mainColorRed", 3, opacity);
+    if (opacity >= 1) {changeRgba("mainColorRed", 3, 1);}
+    else {changeRgba("mainColorRed", 3, opacity);}
     document.getElementById("opacitytext").innerHTML = "Opacity " + opacityToHTML;
     document.getElementById("opacitySectext").innerHTML = "Opacity/sec " + opacitySec;
     document.getElementById("opacitySecGen1").innerHTML = OpacitySecGen1;
@@ -232,10 +260,17 @@ function opacityTotalCheck5() {
     }
 }
 
-function RedCheck() {
+function forRedCheck() {
     if (opacity >= 10) {
         document.getElementById("gainbutton").style.visibility = "";
-        clearInterval(RedCheck);
+        clearInterval(forRedCheck);
+    }
+}
+
+function forMenuCheck() {
+    if (red >= 255) {
+        document.getElementById("backbutton").style.visibility = "";
+        clearInterval(forMenuCheck);
     }
 }
 
