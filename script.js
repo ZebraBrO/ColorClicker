@@ -45,6 +45,145 @@ var OpacitySecGen3 = 0;
 var OpacitySecGen4 = 0;
 var OpacitySecGen5 = 0;
 
+//costNext = costBase * (rateGrowth) ^ owned
+//productionTotal = (productionBase * owned) * multipliers
+
+//arr = [type, costBase, rateGrowth, productionBase, owned]
+
+var gen1 = ["opacity", 0.003738, 1.07, 0.00167, 0];
+var gen2 = ["opacity", 0.060, 1.15, 0.020, 0];
+var gen3 = ["opacity", 0.720, 1.14, 0.090, 0];
+var gen4 = ["opacity", 8.640, 1.13, 0.360, 0];
+var gen5 = ["opacity", 103.680, 1.12, 2.160, 0];
+
+
+
+
+function hardReset() {
+    if (confirm("Are you sure? This will start the game from scratch") === true) {
+        document.getElementById("statsred").style.display = x;
+        document.getElementById("maincolorsstat").style.display = x;
+        document.getElementById("menu_green").style.display = x;
+        document.getElementById("menu_blue").style.display = x;
+        document.getElementById("gradientsection").style.display = x;
+        document.getElementById("opacityGenSecond").style.display = x;
+        document.getElementById("gainbutton").style.visibility = y;
+        document.getElementById("backbutton").style.visibility = y;
+        document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
+        document.getElementById("opacitySectext").style.visibility = y;
+        document.getElementById("opacityGen2").style.visibility = y;
+        document.getElementById("opacityGen3").style.visibility = y;
+        document.getElementById("opacityGen4").style.visibility = y;
+        document.getElementById("opacityGen5").style.visibility = y;
+
+        opacity = 0;
+        opacityTotal = 0;
+        opacitySec = 0;
+        opacityToHTML = 0;
+        red = 0;
+        blue = 0;
+        green = 0;
+        OpacitySecGen1 = 0;
+        OpacitySecGen2 = 0;
+        OpacitySecGen3 = 0;
+        OpacitySecGen4 = 0;
+        OpacitySecGen5 = 0;
+
+        gen1 = ["opacity", 0.003738, 1.07, 0.00167, 0];
+        gen2 = ["opacity", 0.060, 1.15, 0.020, 0];
+        gen3 = ["opacity", 0.720, 1.14, 0.090, 0];
+        gen4 = ["opacity", 8.640, 1.13, 0.360, 0];
+        gen5 = ["opacity", 103.680, 1.12, 2.160, 0];
+
+        document.getElementById("opacityGenSecond").style.display = x;
+        document.getElementById("opacityGenFirst").style.display = "";
+        clearInterval(OpacityTimer, 100);
+    }
+}
+
+function save() {
+    localStorage.setItem("opacity", opacity);
+    localStorage.setItem("opacityTotal", opacityTotal);
+    localStorage.setItem("opacitySec", opacitySec);
+    localStorage.setItem("opacityToHTML", opacityToHTML);
+    localStorage.setItem("red", red);
+    localStorage.setItem("blue", blue);
+    localStorage.setItem("green", green);
+    localStorage.setItem("OpacitySecGen1", OpacitySecGen1);
+    localStorage.setItem("OpacitySecGen2", OpacitySecGen2);
+    localStorage.setItem("OpacitySecGen3", OpacitySecGen3);
+    localStorage.setItem("OpacitySecGen4", OpacitySecGen4);
+    localStorage.setItem("OpacitySecGen5", OpacitySecGen5);
+
+    localStorage.setItem("gen1", JSON.stringify(gen1));
+    localStorage.setItem("gen2", JSON.stringify(gen2));
+    localStorage.setItem("gen3", JSON.stringify(gen3));
+    localStorage.setItem("gen4", JSON.stringify(gen4));
+    localStorage.setItem("gen5", JSON.stringify(gen5));
+}
+
+function load(){
+    debugger
+    clearInterval(OpacityTimer);
+    clearInterval(opacitySecCheck);
+    clearInterval(opacityTotalCheck2);
+    clearInterval(opacityTotalCheck3);
+    clearInterval(opacityTotalCheck4);
+    clearInterval(opacityTotalCheck5);
+    clearInterval(forRedCheck);
+    clearInterval(forMenuCheck);
+
+    document.getElementById("statsred").style.display = x;
+    document.getElementById("maincolorsstat").style.display = x;
+    document.getElementById("menu_green").style.display = x;
+    document.getElementById("menu_blue").style.display = x;
+    document.getElementById("gradientsection").style.display = x;
+    document.getElementById("opacityGenSecond").style.display = x;
+    document.getElementById("gainbutton").style.visibility = y;
+    document.getElementById("backbutton").style.visibility = y;
+    document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
+    document.getElementById("opacitySectext").style.visibility = y;
+    document.getElementById("opacityGen2").style.visibility = y;
+    document.getElementById("opacityGen3").style.visibility = y;
+    document.getElementById("opacityGen4").style.visibility = y;
+    document.getElementById("opacityGen5").style.visibility = y;
+
+    opacity = Number(localStorage.getItem("opacity"));
+    opacityTotal = Number(localStorage.getItem("opacityTotal"));
+    opacitySec = Number(localStorage.getItem("opacitySec"));
+    opacityToHTML = Number(localStorage.getItem("opacityToHTML"));
+    red = Number(localStorage.getItem("red"));
+    blue = Number(localStorage.getItem("blue"));
+    green = Number(localStorage.getItem("green"));
+    OpacitySecGen1 = Number(localStorage.getItem("OpacitySecGen1"));
+    OpacitySecGen2 = Number(localStorage.getItem("OpacitySecGen2"));
+    OpacitySecGen3 = Number(localStorage.getItem("OpacitySecGen3"));
+    OpacitySecGen4 = Number(localStorage.getItem("OpacitySecGen4"));
+    OpacitySecGen5 = Number(localStorage.getItem("OpacitySecGen5"));
+
+    gen1 = JSON.parse(localStorage.getItem("gen1"));
+    gen2 = JSON.parse(localStorage.getItem("gen2"));
+    gen3 = JSON.parse(localStorage.getItem("gen3"));
+    gen4 = JSON.parse(localStorage.getItem("gen4"));
+    gen5 = JSON.parse(localStorage.getItem("gen5"));
+
+    setInterval(OpacityTimer, 100);
+    setInterval(opacitySecCheck);
+    setInterval(opacityTotalCheck2);
+    setInterval(opacityTotalCheck3);
+    setInterval(opacityTotalCheck4);
+    setInterval(opacityTotalCheck5);
+    setInterval(forRedCheck);
+    setInterval(forMenuCheck);
+}
+
+function closingCode() {
+    if (confirm("You have closed the window, would you like to save?") === true) {
+      save();
+      return null;
+    }
+  }
+
 function reset() {
     opacity = 0;
     opacityTotal = 0;
@@ -73,17 +212,6 @@ function reset() {
     document.getElementById("Gen4").innerHTML = Number(gen4[1] * (gen4[2] ** gen4[4])).toFixed(3);
     document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
 }
-
-//costNext = costBase * (rateGrowth) ^ owned
-//productionTotal = (productionBase * owned) * multipliers
-
-//arr = [type, costBase, rateGrowth, productionBase, owned]
-
-var gen1 = ["opacity", 0.003738, 1.07, 0.00167, 0];
-var gen2 = ["opacity", 0.060, 1.15, 0.020, 0];
-var gen3 = ["opacity", 0.720, 1.14, 0.090, 0];
-var gen4 = ["opacity", 8.640, 1.13, 0.360, 0];
-var gen5 = ["opacity", 103.680, 1.12, 2.160, 0];
 
 /*
 function changeRgba(color, mode, productionTotal, colorOpacity) {
@@ -183,7 +311,7 @@ function buy(arr, money, toHTML) {
     if (money >= costNext) {
         money -= costNext;
         arr[4] += 1;
-        document.getElementById(toHTML).innerHTML = Number(arr[1] * (arr[2] ** arr[4])).toFixed(3);
+        document.getElementById(toHTML).innerHTML = "Cost: " + Number(arr[1] * (arr[2] ** arr[4])).toFixed(3);
     }
     return money;
 }
@@ -276,7 +404,6 @@ function forMenuCheck() {
 
 function gainRed() {
     if (opacity >= 10){
-        debugger
         red += Math.log10(opacity).toFixedNoRound(0);
         changeRgba("mainColorRed", 3, opacity);
         changeRgba("mainColorRed", 0, red);

@@ -205,6 +205,8 @@ footer {
 .stats_opacity_div {
   display: flex;
   align-items: center;
+  width: 400px;
+  margin-left: 20px;
 }
 
 .opacity_upgrade1_button {
@@ -218,7 +220,6 @@ footer {
 
 .stats_opacity_text {
   text-align: center;
-  margin-right: 30px;
 }
 
 .stats_red_text {

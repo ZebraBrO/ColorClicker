@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onbeforeunload="return closingCode()">
     <section class="main_colors">
         <div class="menu_colors" id="menu_red">
             <button class="gain_n_back_button buttons" id="backbutton" title="Main menu">To main</button>
@@ -48,32 +48,32 @@
                 <p class="stats_opacity_text default_text" id="opacitytext">Opacity: 0</p>
                 <p class="stats_opacity_text default_text" id="opacitySectext">Opacity/sec: 0</p>
             <div class="stats_opacity_div" id="opacityGenFirst">
-                <button class="opacity_upgrade1_button buttons" title="Generates 0.00167 opacity/sec" onclick="buyFirstOpacityGen()">Generator1 Cost: <p>0</p></button>
+                <button class="opacity_upgrade1_button buttons" title="Generates 0.00167 opacity/sec" onclick="buyFirstOpacityGen()">Generator1<p>Cost: 0</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
                 <p class="num upgrades_default_text">0</p>
             </div>
             <div class="stats_opacity_div" id="opacityGenSecond">
-                <button class="opacity_upgrade1_button buttons" title="Generates 0.00167 opacity/sec" onclick="opacity = buy(gen1, opacity, 'Gen1')">Generator1 Cost: <p class="red_opacity_cost num" id="Gen1">0.004</p></button>
+                <button class="opacity_upgrade1_button buttons" title="Generates 0.00167 opacity/sec" onclick="opacity = buy(gen1, opacity, 'Gen1')">Generator1<p class="red_opacity_cost num" id="Gen1">Cost: 0.004</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
                 <p class="num upgrades_default_text" id="opacitySecGen1">0</p>
             </div>
             <div class="stats_opacity_div" id="opacityGen2">
-                <button class="opacity_upgrade1_button buttons" title="Generates 0.020 opacity/sec" onclick="opacity = buy(gen2, opacity, 'Gen2')">Generator2 Cost: <p class="red_opacity_cost num" id="Gen2">0.060</p></button>
+                <button class="opacity_upgrade1_button buttons" title="Generates 0.020 opacity/sec" onclick="opacity = buy(gen2, opacity, 'Gen2')">Generator2<p class="red_opacity_cost num" id="Gen2">Cost: 0.060</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
                 <p class="num upgrades_default_text" id="opacitySecGen2">0</p>
             </div>
             <div class="stats_opacity_div" id="opacityGen3">
-                <button class="opacity_upgrade1_button buttons" title="Generates 0.090 opacity/sec" onclick="opacity = buy(gen3, opacity, 'Gen3')">Generator3 Cost: <p class="red_opacity_cost num" id="Gen3">0.720</p></button>
+                <button class="opacity_upgrade1_button buttons" title="Generates 0.090 opacity/sec" onclick="opacity = buy(gen3, opacity, 'Gen3')">Generator3<p class="red_opacity_cost num" id="Gen3">Cost: 0.720</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
                 <p class="num upgrades_default_text" id="opacitySecGen3">0</p>
             </div>
             <div class="stats_opacity_div" id="opacityGen4">
-                <button class="opacity_upgrade1_button buttons" title="Generates 0.360 opacity/sec" onclick="opacity = buy(gen4, opacity, 'Gen4')">Generator4 Cost: <p class="red_opacity_cost num" id="Gen4">8.640</p></button>
+                <button class="opacity_upgrade1_button buttons" title="Generates 0.360 opacity/sec" onclick="opacity = buy(gen4, opacity, 'Gen4')">Generator4<p class="red_opacity_cost num" id="Gen4">Cost: 8.640</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
                 <p class="num upgrades_default_text" id="opacitySecGen4">0</p>
             </div>
             <div class="stats_opacity_div" id="opacityGen5">
-                <button class="opacity_upgrade1_button buttons" title="Generates 2.160 opacity/sec" onclick="opacity = buy(gen5, opacity, 'Gen5')">Generator5 Cost: <p class="red_opacity_cost num" id="Gen5">103.680</p></button>
+                <button class="opacity_upgrade1_button buttons" title="Generates 2.160 opacity/sec" onclick="opacity = buy(gen5, opacity, 'Gen5')">Generator5<p class="red_opacity_cost num" id="Gen5">Cost: 103.680</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
                 <p class="num upgrades_default_text" id="opacitySecGen5">0</p>
             </div>            
@@ -89,9 +89,9 @@
     </section>
     <footer>
         <div class="settings">
-            <button class="settings_buttons">Save</button>
-            <button class="settings_buttons">Load</button>
-            <button class="settings_buttons">Hard reset</button>
+            <button class="settings_buttons" onclick="save()">Save</button>
+            <button class="settings_buttons" onclick="load()">Load</button>
+            <button class="settings_buttons" onclick="hardReset()">Hard reset</button>
         </div>
     </footer>
     <script src="script.js"></script>
