@@ -20,19 +20,19 @@ document.getElementById("redCount").style.visibility = y;
 document.getElementById("redMulti").style.visibility = y;
 
 
-var opacity = 1000000;
-var opacityTotal = 0;
-var opacitySec = 0;
-var opacityToHTML = 0;
+var opacity = 0n;
+var opacityTotal = 0n;
+var opacitySec = 0n;
+var opacityToHTML = 0n;
 var red = 0;
 var blue = 0;
 var green = 0;
 
-var OpacitySecGen1 = 0;
-var OpacitySecGen2 = 0;
-var OpacitySecGen3 = 0;
-var OpacitySecGen4 = 0;
-var OpacitySecGen5 = 0;
+var OpacitySecGen1 = 0n;
+var OpacitySecGen2 = 0n;
+var OpacitySecGen3 = 0n;
+var OpacitySecGen4 = 0n;
+var OpacitySecGen5 = 0n;
 
 //costNext = costBase * (rateGrowth) ^ owned
 //productionTotal = (productionBase * owned) * multipliers
@@ -322,7 +322,7 @@ function buy(arr, money, toHTML) {
     if (money >= costNext) {
         money -= costNext;
         arr[4] += 1;
-        document.getElementById(toHTML).innerHTML = "Cost: " + Number(arr[1] * (arr[2] ** arr[4])).toFixed(3);
+        document.getElementById(toHTML).innerHTML = Math.round(arr[1] * (arr[2] ** arr[4]) * 1000) / 1000;
     }
     return money;
 }
@@ -333,7 +333,7 @@ function MoneyTimer(money, productionTotal) {
 }
 
 function opacitySecGens(arr) {
-    let final = arr[4] * arr[3];
+    let final = arr[4] * arr[3] * (2 ** Math.floor(arr[4] / 25));
     return final;
 }
 
@@ -345,7 +345,7 @@ function opacityTimer() {
     OpacitySecGen4 = Number(opacitySecGens(gen4).toFixed(3));
     OpacitySecGen5 = Number(opacitySecGens(gen5).toFixed(3));
     multipliers = red + blue + green + 1;
-    opacitySec = (Number(OpacitySecGen1 + OpacitySecGen2 + OpacitySecGen3 + OpacitySecGen4 + OpacitySecGen5) * multipliers).toFixed(3);
+    opacitySec = Math.round(Number(OpacitySecGen1 + OpacitySecGen2 + OpacitySecGen3 + OpacitySecGen4 + OpacitySecGen5) * multipliers * 1000) / 1000;
     opacity = MoneyTimer(opacity, opacitySec);
     opacityTotal = MoneyTimer(opacityTotal, opacitySec);
     opacityToHTML = Number(opacity.toFixed(3));
