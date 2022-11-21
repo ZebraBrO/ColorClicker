@@ -56,8 +56,17 @@ var gen3 = ["opacity", 0.720, 1.14, 0.090, 0];
 var gen4 = ["opacity", 8.640, 1.13, 0.360, 0];
 var gen5 = ["opacity", 103.680, 1.12, 2.160, 0];
 
+var opacityTimerVar = 0;
+var opacitySecCheckVar = 0;
+var opacityTotalCheck2Var = 0;
+var opacityTotalCheck3Var = 0;
+var opacityTotalCheck4Var = 0;
+var opacityTotalCheck5Var = 0;
+var forRedCheckVar = 0;
+var forMenuCheckVar = 0;
+var autoSave = setInterval(save, 300000);
 
-
+if (localStorage.getItem("opacity") != null) {load();}
 
 function hardReset() {
     if (confirm("Are you sure? This will start the game from scratch") === true) {
@@ -97,7 +106,8 @@ function hardReset() {
 
         document.getElementById("opacityGenSecond").style.display = x;
         document.getElementById("opacityGenFirst").style.display = "";
-        clearInterval(OpacityTimer, 100);
+        clearInterval(opacityTimerVar);
+        opacityTimer()
     }
 }
 
@@ -123,22 +133,21 @@ function save() {
 }
 
 function load(){
-    debugger
-    clearInterval(OpacityTimer);
-    clearInterval(opacitySecCheck);
-    clearInterval(opacityTotalCheck2);
-    clearInterval(opacityTotalCheck3);
-    clearInterval(opacityTotalCheck4);
-    clearInterval(opacityTotalCheck5);
-    clearInterval(forRedCheck);
-    clearInterval(forMenuCheck);
+    clearInterval(opacityTimerVar);
+    clearInterval(opacitySecCheckVar);
+    clearInterval(opacityTotalCheck2Var);
+    clearInterval(opacityTotalCheck3Var);
+    clearInterval(opacityTotalCheck4Var);
+    clearInterval(opacityTotalCheck5Var);
+    clearInterval(forRedCheckVar);
+    clearInterval(forMenuCheckVar);
 
     document.getElementById("statsred").style.display = x;
     document.getElementById("maincolorsstat").style.display = x;
     document.getElementById("menu_green").style.display = x;
     document.getElementById("menu_blue").style.display = x;
     document.getElementById("gradientsection").style.display = x;
-    document.getElementById("opacityGenSecond").style.display = x;
+    
     document.getElementById("gainbutton").style.visibility = y;
     document.getElementById("backbutton").style.visibility = y;
     document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
@@ -167,14 +176,14 @@ function load(){
     gen4 = JSON.parse(localStorage.getItem("gen4"));
     gen5 = JSON.parse(localStorage.getItem("gen5"));
 
-    setInterval(OpacityTimer, 100);
-    setInterval(opacitySecCheck);
-    setInterval(opacityTotalCheck2);
-    setInterval(opacityTotalCheck3);
-    setInterval(opacityTotalCheck4);
-    setInterval(opacityTotalCheck5);
-    setInterval(forRedCheck);
-    setInterval(forMenuCheck);
+    opacityTimerVar = setInterval(opacityTimer, 100);
+    opacitySecCheckVar = setInterval(opacitySecCheck);
+    opacityTotalCheck2Var = setInterval(opacityTotalCheck2);
+    opacityTotalCheck3Var = setInterval(opacityTotalCheck3);
+    opacityTotalCheck4Var = setInterval(opacityTotalCheck4);
+    opacityTotalCheck5Var = setInterval(opacityTotalCheck5);
+    forRedCheckVar = setInterval(forRedCheck);
+    forMenuCheckVar = setInterval(forMenuCheck);
 }
 
 function closingCode() {
@@ -204,13 +213,15 @@ function reset() {
 
     document.getElementById("opacityGenSecond").style.display = x;
     document.getElementById("opacityGenFirst").style.display = "";
-    clearInterval(OpacityTimer, 100);
+
+    clearInterval(opacityTimerVar);
 
     document.getElementById("Gen1").innerHTML = Number(gen1[1] * (gen1[2] ** gen1[4])).toFixed(3);
     document.getElementById("Gen2").innerHTML = Number(gen2[1] * (gen2[2] ** gen2[4])).toFixed(3);
     document.getElementById("Gen3").innerHTML = Number(gen3[1] * (gen3[2] ** gen3[4])).toFixed(3);
     document.getElementById("Gen4").innerHTML = Number(gen4[1] * (gen4[2] ** gen4[4])).toFixed(3);
     document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
+    opacityTimer();
 }
 
 /*
@@ -294,14 +305,14 @@ function changeRgba(color, mode, value) {
 function buyFirstOpacityGen() {
     document.getElementById("opacityGenSecond").style.display = "";
     document.getElementById("opacityGenFirst").style.display = x;
-    setInterval(OpacityTimer, 100);
-    setInterval(opacitySecCheck);
-    setInterval(opacityTotalCheck2);
-    setInterval(opacityTotalCheck3);
-    setInterval(opacityTotalCheck4);
-    setInterval(opacityTotalCheck5);
-    setInterval(forRedCheck);
-    setInterval(forMenuCheck);
+    opacityTimerVar = setInterval(opacityTimer, 100);
+    opacitySecCheckVar = setInterval(opacitySecCheck);
+    opacityTotalCheck2Var = setInterval(opacityTotalCheck2);
+    opacityTotalCheck3Var = setInterval(opacityTotalCheck3);
+    opacityTotalCheck4Var = setInterval(opacityTotalCheck4);
+    opacityTotalCheck5Var = setInterval(opacityTotalCheck5);
+    forRedCheckVar = setInterval(forRedCheck);
+    forMenuCheckVar = setInterval(forMenuCheck);
 
     gen1[4] = 1;
 }
@@ -316,8 +327,6 @@ function buy(arr, money, toHTML) {
     return money;
 }
 
-
-
 function MoneyTimer(money, productionTotal) {
     money += (productionTotal / 10);
     return money;
@@ -328,7 +337,8 @@ function opacitySecGens(arr) {
     return final;
 }
 
-function OpacityTimer() {
+function opacityTimer() {
+    console.log("check")
     OpacitySecGen1 = Number(opacitySecGens(gen1).toFixed(3));
     OpacitySecGen2 = Number(opacitySecGens(gen2).toFixed(3));
     OpacitySecGen3 = Number(opacitySecGens(gen3).toFixed(3));
@@ -343,11 +353,11 @@ function OpacityTimer() {
     else {changeRgba("mainColorRed", 3, opacity);}
     document.getElementById("opacitytext").innerHTML = "Opacity " + opacityToHTML;
     document.getElementById("opacitySectext").innerHTML = "Opacity/sec " + opacitySec;
-    document.getElementById("opacitySecGen1").innerHTML = OpacitySecGen1;
-    document.getElementById("opacitySecGen2").innerHTML = OpacitySecGen2;
-    document.getElementById("opacitySecGen3").innerHTML = OpacitySecGen3;
-    document.getElementById("opacitySecGen4").innerHTML = OpacitySecGen4;
-    document.getElementById("opacitySecGen5").innerHTML = OpacitySecGen5;
+    document.getElementById("opacitySecGen1").innerHTML = OpacitySecGen1 * multipliers;
+    document.getElementById("opacitySecGen2").innerHTML = OpacitySecGen2 * multipliers;
+    document.getElementById("opacitySecGen3").innerHTML = OpacitySecGen3 * multipliers;
+    document.getElementById("opacitySecGen4").innerHTML = OpacitySecGen4 * multipliers;
+    document.getElementById("opacitySecGen5").innerHTML = OpacitySecGen5 * multipliers;
     if (opacity < 10) {
         document.getElementById("gainbutton").innerHTML = "Gain 0 red";
     }
@@ -359,46 +369,46 @@ function OpacityTimer() {
 function opacitySecCheck() {
     if (opacitySec != 0) {
         document.getElementById("opacitySectext").style.visibility = "";
-        clearInterval(opacitySecCheck);
+        clearInterval(opacitySecCheckVar);
     }
 }
 
 function opacityTotalCheck2() {
     if (opacityTotal >= 0.060) {
         document.getElementById("opacityGen2").style.visibility = "";
-        clearInterval(opacityTotalCheck2);
+        clearInterval(opacityTotalCheck2Var);
     }
 }
 function opacityTotalCheck3() {
     if (opacityTotal >= 0.720) {
         document.getElementById("opacityGen3").style.visibility = "";
-        clearInterval(opacityTotalCheck3);
+        clearInterval(opacityTotalCheck3Var);
     }
 }
 function opacityTotalCheck4() {
     if (opacityTotal >= 8.640) {
         document.getElementById("opacityGen4").style.visibility = "";
-        clearInterval(opacityTotalCheck4);
+        clearInterval(opacityTotalCheck4Var);
     }
 }
 function opacityTotalCheck5() {
     if (opacityTotal >= 103.680) {
         document.getElementById("opacityGen5").style.visibility = "";
-        clearInterval(opacityTotalCheck5);
+        clearInterval(opacityTotalCheck5Var);
     }
 }
 
 function forRedCheck() {
     if (opacity >= 10) {
         document.getElementById("gainbutton").style.visibility = "";
-        clearInterval(forRedCheck);
+        clearInterval(forRedCheckVar);
     }
 }
 
 function forMenuCheck() {
     if (red >= 255) {
         document.getElementById("backbutton").style.visibility = "";
-        clearInterval(forMenuCheck);
+        clearInterval(forMenuCheckVar);
     }
 }
 
