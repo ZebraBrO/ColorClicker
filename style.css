@@ -35,11 +35,8 @@ body {
 
 .main_colors {
   margin-top: 50px;
-}
-
-.main_colors {
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 0;
 }
 
 .main_color_red {
@@ -102,7 +99,8 @@ body {
 
 .gain_n_back_button {
   margin-left: 100px;
-  margin-top: 50px;
+  margin-right: 100px;
+  margin-top: 100px;
   margin-bottom: 50px;
   height: 50px;
   text-align: center;
@@ -110,17 +108,6 @@ body {
 }
 
 .red_count {
-  width: 300px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-  margin-left: 100px;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-right: 0;
-}
-
-.red_multi {
   width: 300px;
   height: 50px;
   text-align: center;
@@ -219,7 +206,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -229,14 +216,20 @@ footer {
 
 .stats_opacity_div {
   display: flex;
+  justify-content: center;
   align-items: center;
-  width: 400px;
-  margin-left: 20px;
+  width: 1250px;
 }
 
 .opacity_upgrade1_button {
   margin-top: 15px;
   margin-right: 50px;
+  margin-left: 7%;
+}
+
+.autobuyer {
+  margin-top: 15px;
+  margin-left: 50px;
 }
 
 .stats_red {
@@ -245,6 +238,7 @@ footer {
 
 .stats_opacity_text {
   text-align: center;
+  width: 1250px;
 }
 
 .stats_red_text {
@@ -253,3 +247,7 @@ footer {
   text-align: center;
 }
 
+.checkbox_text {
+  margin-left: 10px;
+  font-size: 10px;
+}

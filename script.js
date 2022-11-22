@@ -17,22 +17,26 @@ document.getElementById("opacityGen3").style.visibility = y;
 document.getElementById("opacityGen4").style.visibility = y;
 document.getElementById("opacityGen5").style.visibility = y;
 document.getElementById("redCount").style.visibility = y;
-document.getElementById("redMulti").style.visibility = y;
+document.getElementById("autobuyerRedGen1").style.visibility = y;
+document.getElementById("autobuyerRedGen2").style.visibility = y;
+document.getElementById("autobuyerRedGen3").style.visibility = y;
+document.getElementById("autobuyerRedGen4").style.visibility = y;
+document.getElementById("autobuyerRedGen5").style.visibility = y;
 
 
-var opacity = 0n;
-var opacityTotal = 0n;
-var opacitySec = 0n;
-var opacityToHTML = 0n;
+var opacity = 0;
+var opacityTotal = 0;
+var opacitySec = 0;
+var opacityToHTML = 0;
 var red = 0;
 var blue = 0;
 var green = 0;
 
-var OpacitySecGen1 = 0n;
-var OpacitySecGen2 = 0n;
-var OpacitySecGen3 = 0n;
-var OpacitySecGen4 = 0n;
-var OpacitySecGen5 = 0n;
+var OpacitySecGen1 = 0;
+var OpacitySecGen2 = 0;
+var OpacitySecGen3 = 0;
+var OpacitySecGen4 = 0;
+var OpacitySecGen5 = 0;
 
 //costNext = costBase * (rateGrowth) ^ owned
 //productionTotal = (productionBase * owned) * multipliers
@@ -76,7 +80,11 @@ function hardReset() {
         document.getElementById("opacityGen4").style.visibility = y;
         document.getElementById("opacityGen5").style.visibility = y;
         document.getElementById("redCount").style.visibility = y;
-        document.getElementById("redMulti").style.visibility = y;
+        document.getElementById("autobuyerRedGen1").style.visibility = y;
+        document.getElementById("autobuyerRedGen2").style.visibility = y;
+        document.getElementById("autobuyerRedGen3").style.visibility = y;
+        document.getElementById("autobuyerRedGen4").style.visibility = y;
+        document.getElementById("autobuyerRedGen5").style.visibility = y;
 
         opacity = 0;
         opacityTotal = 0;
@@ -97,8 +105,15 @@ function hardReset() {
         gen4 = ["opacity", 8.640, 1.13, 0.360, 0];
         gen5 = ["opacity", 103.680, 1.12, 2.160, 0];
 
+        document.getElementById("Gen1").innerHTML = Number(gen1[1] * (gen1[2] ** gen1[4])).toFixed(3);
+        document.getElementById("Gen2").innerHTML = Number(gen2[1] * (gen2[2] ** gen2[4])).toFixed(3);
+        document.getElementById("Gen3").innerHTML = Number(gen3[1] * (gen3[2] ** gen3[4])).toFixed(3);
+        document.getElementById("Gen4").innerHTML = Number(gen4[1] * (gen4[2] ** gen4[4])).toFixed(3);
+        document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
+
         document.getElementById("opacityGenSecond").style.display = x;
         document.getElementById("opacityGenFirst").style.display = "";
+        document.getElementById("redCount").innerHTML = "Red: " + Number(red);
         clearInterval(opacityTimerVar);
         opacityTimer()
     }
@@ -178,6 +193,16 @@ function load(){
     forRedCheckVar = setInterval(forRedCheck);
     forMenuCheckVar = setInterval(forMenuCheck);
     forRedCountMultiCheckVar = setInterval(forRedCountMultiCheck);
+
+    document.getElementById("Gen1").innerHTML = Number(gen1[1] * (gen1[2] ** gen1[4])).toFixed(3);
+    document.getElementById("Gen2").innerHTML = Number(gen2[1] * (gen2[2] ** gen2[4])).toFixed(3);
+    document.getElementById("Gen3").innerHTML = Number(gen3[1] * (gen3[2] ** gen3[4])).toFixed(3);
+    document.getElementById("Gen4").innerHTML = Number(gen4[1] * (gen4[2] ** gen4[4])).toFixed(3);
+    document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
+
+    changeRgba("mainColorRed", 0, red);
+    document.getElementById("redCount").innerHTML = "Red: " + Number(red);
+    opacityTimer();
 }
 
 function closingCode() {
@@ -219,37 +244,8 @@ function reset() {
     document.getElementById("redCount").innerHTML = "Red: " + Number(red);
 
     opacityTimer();
-    document.getElementById("redMulti").innerHTML = "Multipliers: " + Number(multipliers);
     
 }
-
-/*
-function changeRgba(color, mode, productionTotal, colorOpacity) {
-    debugger
-    let rgba = document.getElementById(color).style.backgroundColor;
-    rgba = rgba.substring(5, rgba.length - 1).replace(/ /g, '').split(',');
-    let red = Number(rgba[0]);
-    let green = Number(rgba[1]);
-    let blue = Number(rgba[2]);
-    let opacity = Number(rgba[3]);
-    if (mode == 0) {            // Change red
-        red += (productionTotal / 10);
-        document.getElementById(color).style.background = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
-    } 
-    else if (mode == 1) {       // Change green
-        green += (productionTotal / 10);
-        document.getElementById(color).style.background = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
-    }
-    else if (mode == 2) {       // Change blue
-        blue += (productionTotal / 10);
-        document.getElementById(color).style.background = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
-    }
-    else if (mode == 3) {       //Change opacity
-        opacity += (productionTotal / 10);
-        document.getElementById(color).style.background = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
-    }
-}
-*/
 
 function changeRgba(color, mode, value) {
     let rgba = document.getElementById(color).style.backgroundColor;
@@ -362,7 +358,7 @@ function opacityTimer() {
         document.getElementById("gainbutton").innerHTML = "Gain 0 red";
     }
     else {
-        document.getElementById("gainbutton").innerHTML = "Gain " + Math.log10(opacity).toFixedNoRound(0) + " red";
+        document.getElementById("gainbutton").innerHTML = "Gain " + toFixedNoRound(Math.log10(opacity)) + " red";
     }
 }
 
@@ -414,7 +410,7 @@ function forMenuCheck() {
 
 function gainRed() {
     if (opacity >= 10){
-        red += Math.log10(opacity).toFixedNoRound(0);
+        red += toFixedNoRound(Math.log10(opacity));
         changeRgba("mainColorRed", 3, opacity);
         changeRgba("mainColorRed", 0, red);
         reset()
@@ -423,13 +419,23 @@ function gainRed() {
 
 function forRedCountMultiCheck() {
     if (red > 0) {
-        document.getElementById("redMulti").style.visibility = "";
         document.getElementById("redCount").style.visibility = "";
+        document.getElementById("autobuyerRedGen1").style.visibility = "";
+        document.getElementById("autobuyerRedGen2").style.visibility = "";
+        document.getElementById("autobuyerRedGen3").style.visibility = "";
+        document.getElementById("autobuyerRedGen4").style.visibility = "";
+        document.getElementById("autobuyerRedGen5").style.visibility = "";
         clearInterval(forRedCountMultiCheck);
     }
 }
 
-Number.prototype.toFixedNoRound = function (precition = 1) {
+function tomenu(mode) {
+    if (mode == 0) {
+        
+    }
+}
+
+function toFixedNoRound(number, precition = 0) {
     let factor = Math.pow(10, precition);
-    return Math.floor(this * factor) / factor;
+    return Math.floor(number * factor) / factor;
 }
