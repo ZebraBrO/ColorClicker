@@ -8,20 +8,22 @@ document.getElementById("menu_green").style.display = x;
 document.getElementById("menu_blue").style.display = x;
 document.getElementById("gradientsection").style.display = x;
 document.getElementById("opacityGenSecond").style.display = x;
+document.getElementById("autobuyerRedGen0Div").style.display = x;
+document.getElementById("autobuyerRedGen1Div").style.display = x;
+document.getElementById("autobuyerRedGen2Div").style.display = x;
+document.getElementById("autobuyerRedGen3Div").style.display = x;
+document.getElementById("autobuyerRedGen4Div").style.display = x;
+document.getElementById("autobuyerRedGen5Div").style.display = x;
+document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
 document.getElementById("gainbutton").style.visibility = y;
 document.getElementById("backbutton").style.visibility = y;
-document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
 document.getElementById("opacitySectext").style.visibility = y;
 document.getElementById("opacityGen2").style.visibility = y;
 document.getElementById("opacityGen3").style.visibility = y;
 document.getElementById("opacityGen4").style.visibility = y;
 document.getElementById("opacityGen5").style.visibility = y;
 document.getElementById("redCount").style.visibility = y;
-document.getElementById("autobuyerRedGen1").style.visibility = y;
-document.getElementById("autobuyerRedGen2").style.visibility = y;
-document.getElementById("autobuyerRedGen3").style.visibility = y;
-document.getElementById("autobuyerRedGen4").style.visibility = y;
-document.getElementById("autobuyerRedGen5").style.visibility = y;
+
 
 
 var opacity = 0;
@@ -49,6 +51,12 @@ var gen3 = ["opacity", 0.720, 1.14, 0.090, 0];
 var gen4 = ["opacity", 8.640, 1.13, 0.360, 0];
 var gen5 = ["opacity", 103.680, 1.12, 2.160, 0];
 
+var autobuyer1 = ["red", 2, 1, 1, 0];
+var autobuyer2 = ["red", 4, 1, 1, 0];
+var autobuyer3 = ["red", 8, 1, 1, 0];
+var autobuyer4 = ["red", 16, 1, 1, 0];
+var autobuyer5 = ["red", 32, 1, 1, 0];
+
 var opacityTimerVar = 0;
 var opacitySecCheckVar = 0;
 var opacityTotalCheck2Var = 0;
@@ -57,7 +65,9 @@ var opacityTotalCheck4Var = 0;
 var opacityTotalCheck5Var = 0;
 var forRedCheckVar = 0;
 var forMenuCheckVar = 0;
+var forAutobuyersVar = 0;
 var forRedCountMultiCheckVar = 0;
+var redOpacityAutobuyerVar = 0;
 
 var autoSave = setInterval(save, 300000);
 
@@ -71,20 +81,21 @@ function hardReset() {
         document.getElementById("menu_blue").style.display = x;
         document.getElementById("gradientsection").style.display = x;
         document.getElementById("opacityGenSecond").style.display = x;
+        document.getElementById("autobuyerRedGen0Div").style.display = x;
+        document.getElementById("autobuyerRedGen1Div").style.display = x;
+        document.getElementById("autobuyerRedGen2Div").style.display = x;
+        document.getElementById("autobuyerRedGen3Div").style.display = x;
+        document.getElementById("autobuyerRedGen4Div").style.display = x;
+        document.getElementById("autobuyerRedGen5Div").style.display = x;
+        document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
         document.getElementById("gainbutton").style.visibility = y;
         document.getElementById("backbutton").style.visibility = y;
-        document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
         document.getElementById("opacitySectext").style.visibility = y;
         document.getElementById("opacityGen2").style.visibility = y;
         document.getElementById("opacityGen3").style.visibility = y;
         document.getElementById("opacityGen4").style.visibility = y;
         document.getElementById("opacityGen5").style.visibility = y;
         document.getElementById("redCount").style.visibility = y;
-        document.getElementById("autobuyerRedGen1").style.visibility = y;
-        document.getElementById("autobuyerRedGen2").style.visibility = y;
-        document.getElementById("autobuyerRedGen3").style.visibility = y;
-        document.getElementById("autobuyerRedGen4").style.visibility = y;
-        document.getElementById("autobuyerRedGen5").style.visibility = y;
 
         opacity = 0;
         opacityTotal = 0;
@@ -104,6 +115,12 @@ function hardReset() {
         gen3 = ["opacity", 0.720, 1.14, 0.090, 0];
         gen4 = ["opacity", 8.640, 1.13, 0.360, 0];
         gen5 = ["opacity", 103.680, 1.12, 2.160, 0];
+
+        autobuyer1 = ["red", 2, 1, 1, 0];
+        autobuyer2 = ["red", 4, 1, 1, 0];
+        autobuyer3 = ["red", 8, 1, 1, 0];
+        autobuyer4 = ["red", 16, 1, 1, 0];
+        autobuyer5 = ["red", 32, 1, 1, 0];
 
         document.getElementById("Gen1").innerHTML = Number(gen1[1] * (gen1[2] ** gen1[4])).toFixed(3);
         document.getElementById("Gen2").innerHTML = Number(gen2[1] * (gen2[2] ** gen2[4])).toFixed(3);
@@ -138,71 +155,93 @@ function save() {
     localStorage.setItem("gen3", JSON.stringify(gen3));
     localStorage.setItem("gen4", JSON.stringify(gen4));
     localStorage.setItem("gen5", JSON.stringify(gen5));
+
+    localStorage.setItem("autobuyer1", JSON.stringify(autobuyer1));
+    localStorage.setItem("autobuyer2", JSON.stringify(autobuyer2));
+    localStorage.setItem("autobuyer3", JSON.stringify(autobuyer3));
+    localStorage.setItem("autobuyer4", JSON.stringify(autobuyer4));
+    localStorage.setItem("autobuyer5", JSON.stringify(autobuyer5));
 }
 
 function load(){
-    clearInterval(opacityTimerVar);
-    clearInterval(opacitySecCheckVar);
-    clearInterval(opacityTotalCheck2Var);
-    clearInterval(opacityTotalCheck3Var);
-    clearInterval(opacityTotalCheck4Var);
-    clearInterval(opacityTotalCheck5Var);
-    clearInterval(forRedCheckVar);
-    clearInterval(forMenuCheckVar);
+    if (localStorage.getItem("gen3") == null) {
+           alert("There is no save found") 
+    }
+    else {
+        clearInterval(opacityTimerVar);
+        clearInterval(opacitySecCheckVar);
+        clearInterval(opacityTotalCheck2Var);
+        clearInterval(opacityTotalCheck3Var);
+        clearInterval(opacityTotalCheck4Var);
+        clearInterval(opacityTotalCheck5Var);
+        clearInterval(forRedCheckVar);
+        clearInterval(forMenuCheckVar);
+        clearInterval(forAutobuyersVar);
+        clearInterval(redOpacityAutobuyerVar);
 
-    document.getElementById("statsred").style.display = x;
-    document.getElementById("maincolorsstat").style.display = x;
-    document.getElementById("menu_green").style.display = x;
-    document.getElementById("menu_blue").style.display = x;
-    document.getElementById("gradientsection").style.display = x;
-    
-    document.getElementById("gainbutton").style.visibility = y;
-    document.getElementById("backbutton").style.visibility = y;
-    document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
-    document.getElementById("opacitySectext").style.visibility = y;
-    document.getElementById("opacityGen2").style.visibility = y;
-    document.getElementById("opacityGen3").style.visibility = y;
-    document.getElementById("opacityGen4").style.visibility = y;
-    document.getElementById("opacityGen5").style.visibility = y;
 
-    opacity = Number(localStorage.getItem("opacity"));
-    opacityTotal = Number(localStorage.getItem("opacityTotal"));
-    opacitySec = Number(localStorage.getItem("opacitySec"));
-    opacityToHTML = Number(localStorage.getItem("opacityToHTML"));
-    red = Number(localStorage.getItem("red"));
-    blue = Number(localStorage.getItem("blue"));
-    green = Number(localStorage.getItem("green"));
-    OpacitySecGen1 = Number(localStorage.getItem("OpacitySecGen1"));
-    OpacitySecGen2 = Number(localStorage.getItem("OpacitySecGen2"));
-    OpacitySecGen3 = Number(localStorage.getItem("OpacitySecGen3"));
-    OpacitySecGen4 = Number(localStorage.getItem("OpacitySecGen4"));
-    OpacitySecGen5 = Number(localStorage.getItem("OpacitySecGen5"));
+        document.getElementById("statsred").style.display = x;
+        document.getElementById("maincolorsstat").style.display = x;
+        document.getElementById("menu_green").style.display = x;
+        document.getElementById("menu_blue").style.display = x;
+        document.getElementById("gradientsection").style.display = x;
+        
+        document.getElementById("gainbutton").style.visibility = y;
+        document.getElementById("backbutton").style.visibility = y;
+        document.getElementById("mainColorRed").style.background = "rgba(0, 0, 0, 0)";
+        document.getElementById("opacitySectext").style.visibility = y;
+        document.getElementById("opacityGen2").style.visibility = y;
+        document.getElementById("opacityGen3").style.visibility = y;
+        document.getElementById("opacityGen4").style.visibility = y;
+        document.getElementById("opacityGen5").style.visibility = y;
 
-    gen1 = JSON.parse(localStorage.getItem("gen1"));
-    gen2 = JSON.parse(localStorage.getItem("gen2"));
-    gen3 = JSON.parse(localStorage.getItem("gen3"));
-    gen4 = JSON.parse(localStorage.getItem("gen4"));
-    gen5 = JSON.parse(localStorage.getItem("gen5"));
+        opacity = Number(localStorage.getItem("opacity"));
+        opacityTotal = Number(localStorage.getItem("opacityTotal"));
+        opacitySec = Number(localStorage.getItem("opacitySec"));
+        opacityToHTML = Number(localStorage.getItem("opacityToHTML"));
+        red = Number(localStorage.getItem("red"));
+        blue = Number(localStorage.getItem("blue"));
+        green = Number(localStorage.getItem("green"));
+        OpacitySecGen1 = Number(localStorage.getItem("OpacitySecGen1"));
+        OpacitySecGen2 = Number(localStorage.getItem("OpacitySecGen2"));
+        OpacitySecGen3 = Number(localStorage.getItem("OpacitySecGen3"));
+        OpacitySecGen4 = Number(localStorage.getItem("OpacitySecGen4"));
+        OpacitySecGen5 = Number(localStorage.getItem("OpacitySecGen5"));
 
-    opacityTimerVar = setInterval(opacityTimer, 100);
-    opacitySecCheckVar = setInterval(opacitySecCheck);
-    opacityTotalCheck2Var = setInterval(opacityTotalCheck2);
-    opacityTotalCheck3Var = setInterval(opacityTotalCheck3);
-    opacityTotalCheck4Var = setInterval(opacityTotalCheck4);
-    opacityTotalCheck5Var = setInterval(opacityTotalCheck5);
-    forRedCheckVar = setInterval(forRedCheck);
-    forMenuCheckVar = setInterval(forMenuCheck);
-    forRedCountMultiCheckVar = setInterval(forRedCountMultiCheck);
+        gen1 = JSON.parse(localStorage.getItem("gen1"));
+        gen2 = JSON.parse(localStorage.getItem("gen2"));
+        gen3 = JSON.parse(localStorage.getItem("gen3"));
+        gen4 = JSON.parse(localStorage.getItem("gen4"));
+        gen5 = JSON.parse(localStorage.getItem("gen5"));
 
-    document.getElementById("Gen1").innerHTML = Number(gen1[1] * (gen1[2] ** gen1[4])).toFixed(3);
-    document.getElementById("Gen2").innerHTML = Number(gen2[1] * (gen2[2] ** gen2[4])).toFixed(3);
-    document.getElementById("Gen3").innerHTML = Number(gen3[1] * (gen3[2] ** gen3[4])).toFixed(3);
-    document.getElementById("Gen4").innerHTML = Number(gen4[1] * (gen4[2] ** gen4[4])).toFixed(3);
-    document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
+        autobuyer1 = JSON.parse(localStorage.getItem("autobuyer1"));
+        autobuyer2 = JSON.parse(localStorage.getItem("autobuyer2"));
+        autobuyer3 = JSON.parse(localStorage.getItem("autobuyer3"));
+        autobuyer4 = JSON.parse(localStorage.getItem("autobuyer4"));
+        autobuyer5 = JSON.parse(localStorage.getItem("autobuyer5"));
 
-    changeRgba("mainColorRed", 0, red);
-    document.getElementById("redCount").innerHTML = "Red: " + Number(red);
-    opacityTimer();
+        opacityTimerVar = setInterval(opacityTimer, 100);
+        opacitySecCheckVar = setInterval(opacitySecCheck);
+        opacityTotalCheck2Var = setInterval(opacityTotalCheck2);
+        opacityTotalCheck3Var = setInterval(opacityTotalCheck3);
+        opacityTotalCheck4Var = setInterval(opacityTotalCheck4);
+        opacityTotalCheck5Var = setInterval(opacityTotalCheck5);
+        forRedCheckVar = setInterval(forRedCheck);
+        forMenuCheckVar = setInterval(forMenuCheck);
+        forAutobuyersVar = setInterval(forAutobuyers);
+        forRedCountMultiCheckVar = setInterval(forRedCountMultiCheck);
+        redOpacityAutobuyerVar = setInterval(redOpacityAutobuyer, 1000);
+
+        document.getElementById("Gen1").innerHTML = Number(gen1[1] * (gen1[2] ** gen1[4])).toFixed(3);
+        document.getElementById("Gen2").innerHTML = Number(gen2[1] * (gen2[2] ** gen2[4])).toFixed(3);
+        document.getElementById("Gen3").innerHTML = Number(gen3[1] * (gen3[2] ** gen3[4])).toFixed(3);
+        document.getElementById("Gen4").innerHTML = Number(gen4[1] * (gen4[2] ** gen4[4])).toFixed(3);
+        document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
+
+        changeRgba("mainColorRed", 0, red);
+        document.getElementById("redCount").innerHTML = "Red: " + Number(red);
+        opacityTimer();
+    }
 }
 
 function closingCode() {
@@ -232,6 +271,11 @@ function reset() {
 
     document.getElementById("opacityGenSecond").style.display = x;
     document.getElementById("opacityGenFirst").style.display = "";
+
+    if (document.getElementById("redAutobuyerCheckbox1").checked == true) {
+        document.getElementById("redAutobuyerCheckbox0").checked = true
+        document.getElementById("redAutobuyerCheckbox1").checked = false
+    }
 
     clearInterval(opacityTimerVar);
 
@@ -300,6 +344,10 @@ function changeRgba(color, mode, value) {
 function buyFirstOpacityGen() {
     document.getElementById("opacityGenSecond").style.display = "";
     document.getElementById("opacityGenFirst").style.display = x;
+    if (document.getElementById("redAutobuyerCheckbox0").checked == true) {
+        document.getElementById("redAutobuyerCheckbox1").checked = true
+        document.getElementById("redAutobuyerCheckbox0").checked = false
+    }
     opacityTimerVar = setInterval(opacityTimer, 100);
     opacitySecCheckVar = setInterval(opacitySecCheck);
     opacityTotalCheck2Var = setInterval(opacityTotalCheck2);
@@ -308,7 +356,8 @@ function buyFirstOpacityGen() {
     opacityTotalCheck5Var = setInterval(opacityTotalCheck5);
     forRedCheckVar = setInterval(forRedCheck);
     forMenuCheckVar = setInterval(forMenuCheck);
-
+    forAutobuyersVar = setInterval(forAutobuyers);
+    redOpacityAutobuyerVar = setInterval(redOpacityAutobuyer, 1000);
 
     gen1[4] = 1;
 }
@@ -340,7 +389,7 @@ function opacityTimer() {
     OpacitySecGen3 = Number(opacitySecGens(gen3).toFixed(3));
     OpacitySecGen4 = Number(opacitySecGens(gen4).toFixed(3));
     OpacitySecGen5 = Number(opacitySecGens(gen5).toFixed(3));
-    multipliers = red + blue + green + 1;
+    multipliers = ((red + 1) * (blue + 1)) * (green + 1);
     opacitySec = Math.round(Number(OpacitySecGen1 + OpacitySecGen2 + OpacitySecGen3 + OpacitySecGen4 + OpacitySecGen5) * multipliers * 1000) / 1000;
     opacity = MoneyTimer(opacity, opacitySec);
     opacityTotal = MoneyTimer(opacityTotal, opacitySec);
@@ -408,6 +457,18 @@ function forMenuCheck() {
     }
 }
 
+function forAutobuyers() {
+    if (red >= 10) {
+        document.getElementById("autobuyerRedGen0Div").style.display = "";
+        document.getElementById("autobuyerRedGen1Div").style.display = "";
+        document.getElementById("autobuyerRedGen2Div").style.display = "";
+        document.getElementById("autobuyerRedGen3Div").style.display = "";
+        document.getElementById("autobuyerRedGen4Div").style.display = "";
+        document.getElementById("autobuyerRedGen5Div").style.display = "";
+        clearInterval(forAutobuyersVar);
+    }
+}
+
 function gainRed() {
     if (opacity >= 10){
         red += toFixedNoRound(Math.log10(opacity));
@@ -420,11 +481,6 @@ function gainRed() {
 function forRedCountMultiCheck() {
     if (red > 0) {
         document.getElementById("redCount").style.visibility = "";
-        document.getElementById("autobuyerRedGen1").style.visibility = "";
-        document.getElementById("autobuyerRedGen2").style.visibility = "";
-        document.getElementById("autobuyerRedGen3").style.visibility = "";
-        document.getElementById("autobuyerRedGen4").style.visibility = "";
-        document.getElementById("autobuyerRedGen5").style.visibility = "";
         clearInterval(forRedCountMultiCheck);
     }
 }
@@ -433,6 +489,35 @@ function tomenu(mode) {
     if (mode == 0) {
         
     }
+}
+
+function redOpacityAutobuyer() {
+    debugger
+    if (document.getElementById("redAutobuyerCheckbox0").checked == true) {
+        buyFirstOpacityGen();
+    }
+    autobuy(autobuyer1, gen1, opacity, "Gen1", "redAutobuyerCheckbox1")
+    autobuy(autobuyer2, gen2, opacity, "Gen2", "redAutobuyerCheckbox2")
+    autobuy(autobuyer3, gen3, opacity, "Gen3", "redAutobuyerCheckbox3")
+    autobuy(autobuyer4, gen4, opacity, "Gen4", "redAutobuyerCheckbox4")
+    autobuy(autobuyer5, gen5, opacity, "Gen5", "redAutobuyerCheckbox5")
+}
+
+function buyRedAutoBuyer(autobuyer, toHTML) {
+    red = buy(autobuyer, red, toHTML);
+    changeRgba("mainColorRed", 0, red);
+    document.getElementById("redCount").innerHTML = "Red: " + Number(red);
+    if (autobuyer == autobuyer1) {
+        buy(autobuyer, red, "RedGen0");
+    }
+}
+
+function autobuy(autobuyer, gen, money, toHTML, checkboxID) { /* autobuyer - array, money - currency used to autobuy */
+	if (document.getElementById(checkboxID).checked) {
+		for (let i = autobuyer[4]; i == 0; i--) {
+            money = buy(gen, money, toHTML)
+        }
+	}
 }
 
 function toFixedNoRound(number, precition = 0) {

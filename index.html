@@ -53,50 +53,62 @@
             <div class="stats_opacity_div" id="opacityGenFirst">
                 <button class="opacity_upgrade1_button buttons" title="Generates 0.00167 opacity/sec" onclick="buyFirstOpacityGen()">Generator1<p>Cost: 0</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
-                <p class="num upgrades_default_text">0</p>
-                <button class="autobuyer buttons" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off">Autobuyer<p>Cost: 0</p></button>
-                <label class="default_text checkbox_text" for="toggle">Toggle</label>
-                <input type="checkbox">
+                <p class="num upgrades_default_text red_opacity_sec_gen">0</p>
+                <div class="autobuyer" id="autobuyerRedGen0Div">
+                    <button class="buttons" id="autobuyerRedGen0" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer1, 'RedGen1')">Autobuyer<p id="RedGen0">Cost: 2</p></button>
+                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <input type="checkbox" id="redAutobuyerCheckbox0">
+                </div>
             </div>
             <div class="stats_opacity_div" id="opacityGenSecond">
                 <button class="opacity_upgrade1_button buttons" title="Generates 0.00167 opacity/sec" onclick="opacity = buy(gen1, opacity, 'Gen1')">Generator1<p class="red_opacity_cost num" id="Gen1">Cost: 0.004</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
-                <p class="num upgrades_default_text" id="opacitySecGen1">0</p>
-                <button class="autobuyer buttons" id="autobuyerRedGen1" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off">Autobuyer<p id="RedGen1">Cost: 0</p></button>
-                <label class="default_text checkbox_text" for="toggle">Toggle</label>
-                <input type="checkbox">
+                <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen1">0</p>
+                <div class="autobuyer" id="autobuyerRedGen1Div">
+                    <button class="buttons" id="autobuyerRedGen1" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer1, 'RedGen1')">Autobuyer<p id="RedGen1">Cost: 2</p></button>
+                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <input type="checkbox" id="redAutobuyerCheckbox1">
+                </div>
             </div>
             <div class="stats_opacity_div" id="opacityGen2">
                 <button class="opacity_upgrade1_button buttons" title="Generates 0.020 opacity/sec" onclick="opacity = buy(gen2, opacity, 'Gen2')">Generator2<p class="red_opacity_cost num" id="Gen2">Cost: 0.060</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
-                <p class="num upgrades_default_text" id="opacitySecGen2">0</p>
-                <button class="autobuyer buttons" id="autobuyerRedGen2" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off">Autobuyer<p id="RedGen2">Cost: 0</p></button>
-                <label class="default_text checkbox_text" for="toggle">Toggle</label>
-                <input type="checkbox">
+                <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen2">0</p>
+                <div class="autobuyer" id="autobuyerRedGen2Div">
+                    <button class="buttons" id="autobuyerRedGen2" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer2, 'RedGen2')">Autobuyer<p id="RedGen2">Cost: 4</p></button>
+                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <input type="checkbox" id="redAutobuyerCheckbox2">
+                </div>
             </div>
             <div class="stats_opacity_div" id="opacityGen3">
                 <button class="opacity_upgrade1_button buttons" title="Generates 0.090 opacity/sec" onclick="opacity = buy(gen3, opacity, 'Gen3')">Generator3<p class="red_opacity_cost num" id="Gen3">Cost: 0.720</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
-                <p class="num upgrades_default_text" id="opacitySecGen3">0</p>
-                <button class="autobuyer buttons" id="autobuyerRedGen3" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off">Autobuyer<p id="RedGen3">Cost: 0</p></button>
-                <label class="default_text checkbox_text" for="toggle">Toggle</label>
-                <input type="checkbox">
+                <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen3">0</p>
+                <div class="autobuyer" id="autobuyerRedGen3Div">
+                    <button class="buttons" id="autobuyerRedGen3" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer3, 'RedGen3')">Autobuyer<p id="RedGen3">Cost: 8</p></button>
+                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <input type="checkbox" id="redAutobuyerCheckbox3">
+                </div>
             </div>
             <div class="stats_opacity_div" id="opacityGen4">
                 <button class="opacity_upgrade1_button buttons" title="Generates 0.360 opacity/sec" onclick="opacity = buy(gen4, opacity, 'Gen4')">Generator4<p class="red_opacity_cost num" id="Gen4">Cost: 8.640</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
-                <p class="num upgrades_default_text" id="opacitySecGen4">0</p>
-                <button class="autobuyer buttons" id="autobuyerRedGen4" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off">Autobuyer<p id="RedGen4">Cost: 0</p></button>
-                <label class="default_text checkbox_text" for="toggle">Toggle</label>
-                <input type="checkbox">
+                <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen4">0</p>
+                <div class="autobuyer" id="autobuyerRedGen4Div">
+                    <button class="buttons" id="autobuyerRedGen4" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer4, 'RedGen4')">Autobuyer<p id="RedGen4">Cost: 16</p></button>
+                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <input type="checkbox" id="redAutobuyerCheckbox4">
+                </div>
             </div>
             <div class="stats_opacity_div" id="opacityGen5">
                 <button class="opacity_upgrade1_button buttons" title="Generates 2.160 opacity/sec" onclick="opacity = buy(gen5, opacity, 'Gen5')">Generator5<p class="red_opacity_cost num" id="Gen5">Cost: 103.680</p></button>
                 <p class="stats_upgrade1_button_rate upgrades_default_text">Opacity/Sec: </p>
-                <p class="num upgrades_default_text" id="opacitySecGen5" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off">0</p>
-                <button class="autobuyer buttons" id="autobuyerRedGen5">Autobuyer<p id="RedGen5">Cost: 0</p></button>
-                <label class="default_text checkbox_text" for="toggle">Toggle</label>
-                <input type="checkbox">
+                <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen5" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off">0</p>
+                <div class="autobuyer" id="autobuyerRedGen5Div">
+                    <button class="buttons" id="autobuyerRedGen5" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer5, 'RedGen5')">Autobuyer<p id="RedGen5">Cost: 32</p></button>
+                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <input type="checkbox" id="redAutobuyerCheckbox5">
+                </div> 
             </div>            
         </div>
         <div class="stats_red" id="statsred">
