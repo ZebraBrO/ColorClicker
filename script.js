@@ -493,14 +493,24 @@ function tomenu(mode) {
 
 function redOpacityAutobuyer() {
     debugger
-    if (document.getElementById("redAutobuyerCheckbox0").checked == true) {
+    if (document.getElementById("redAutobuyerCheckbox0").checked == true & autobuyer1[4] > 0) {
         buyFirstOpacityGen();
     }
-    autobuy(autobuyer1, gen1, opacity, "Gen1", "redAutobuyerCheckbox1")
-    autobuy(autobuyer2, gen2, opacity, "Gen2", "redAutobuyerCheckbox2")
-    autobuy(autobuyer3, gen3, opacity, "Gen3", "redAutobuyerCheckbox3")
-    autobuy(autobuyer4, gen4, opacity, "Gen4", "redAutobuyerCheckbox4")
-    autobuy(autobuyer5, gen5, opacity, "Gen5", "redAutobuyerCheckbox5")
+    if (document.getElementById("redAutobuyerCheckbox1").checked == true) {
+        opacity = autobuy(autobuyer1, gen1, opacity, "Gen1", "redAutobuyerCheckbox1");
+    }
+    if (document.getElementById("redAutobuyerCheckbox2").checked == true) {
+        opacity = autobuy(autobuyer2, gen2, opacity, "Gen2", "redAutobuyerCheckbox2");
+    }
+    if (document.getElementById("redAutobuyerCheckbox3").checked == true) {
+        opacity = autobuy(autobuyer3, gen3, opacity, "Gen3", "redAutobuyerCheckbox3");
+    }
+    if (document.getElementById("redAutobuyerCheckbox4").checked == true) {
+        opacity = autobuy(autobuyer4, gen4, opacity, "Gen4", "redAutobuyerCheckbox4");
+    }
+    if (document.getElementById("redAutobuyerCheckbox5").checked == true) {
+        opacity = autobuy(autobuyer5, gen5, opacity, "Gen5", "redAutobuyerCheckbox5");
+    }
 }
 
 function buyRedAutoBuyer(autobuyer, toHTML) {
@@ -508,16 +518,14 @@ function buyRedAutoBuyer(autobuyer, toHTML) {
     changeRgba("mainColorRed", 0, red);
     document.getElementById("redCount").innerHTML = "Red: " + Number(red);
     if (autobuyer == autobuyer1) {
-        buy(autobuyer, red, "RedGen0");
+        return buy(autobuyer, red, "RedGen0");
     }
 }
 
 function autobuy(autobuyer, gen, money, toHTML, checkboxID) { /* autobuyer - array, money - currency used to autobuy */
-	if (document.getElementById(checkboxID).checked) {
-		for (let i = autobuyer[4]; i == 0; i--) {
-            money = buy(gen, money, toHTML)
-        }
-	}
+	for (let i = 0; i < autobuyer[4]; i++) {
+        return buy(gen, money, toHTML);
+    }
 }
 
 function toFixedNoRound(number, precition = 0) {
