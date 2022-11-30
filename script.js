@@ -340,6 +340,9 @@ function reset() {
     clearInterval(opacityTimerVar);
     opacityTimerVar = null;
 
+    clearInterval(redOpacityAutobuyerVar);
+    redOpacityAutobuyerVar = null;
+
     document.getElementById("Gen1").innerHTML = Number(gen1[1] * (gen1[2] ** gen1[4])).toFixed(3);
     document.getElementById("Gen2").innerHTML = Number(gen2[1] * (gen2[2] ** gen2[4])).toFixed(3);
     document.getElementById("Gen3").innerHTML = Number(gen3[1] * (gen3[2] ** gen3[4])).toFixed(3);
