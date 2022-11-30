@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen&display=swap" rel="stylesheet">
 </head>
-<body onbeforeunload="return closingCode()" onmousedown="return false" onselectstart="return false">
-    <section class="main_colors">
+<body onbeforeunload="return closingCode()" onmousedown="return false" onselectstart="return false" id="forwin2">
+    <section class="main_colors" id="forwin0">
         <div class="menu_colors" id="menu_red">
             <button class="gain_n_back_button buttons" id="backbutton" onclick="tomenu(0)" title="Main menu">To main</button>
             <div class="main_color_red" id="mainColorRed"></div>
@@ -32,7 +32,7 @@
                 <button class="upgrade_form buttons" id="upgrade_form_red" onclick="goback(0)">Upgrades</button>
             </div>
             <div class="main_colors_buttons" id="redcolorsbutton2">
-                <button class="gain_menu buttons" id="gain_menu_red" onclick="gainRed()">Max all (M)</button>
+                <button class="gain_menu buttons" id="gain_menu_red" onclick="gainRed()">Gain 0 red</button>
             </div>
         </div>
         <div class="menu_colors" id="menu_green">
@@ -40,17 +40,16 @@
             <div class="stats_main_colors stats_green" id="greencolorsstat">
                 <div class="main_colors_buttons" id="greencolorsbuttons">
                     <button class="upgrade_form buttons" id="upgrade_form_green">Upgrades</button>
-                    <button class="gain_menu buttons" id="gain_menu_green">Max all (M)</button>
+                    <button class="gain_menu buttons" id="gain_menu_green">Gain 0 blue</button>
                 </div>
             </div>
         </div>
         <div class="menu_colors" id="menu_blue">
             <div class="main_color_blue" id="maincolorblue"></div>
             <div class="stats_main_colors stats_blue" id="bluecolorsstat">
-                <div id="stat1"></div>
                 <div class="main_colors_buttons" id="bluecolorsbuttons">
                         <button class="upgrade_form buttons" id="upgrade_form_blue">Upgrades</button>
-                        <button class="gain_menu buttons" id="gain_menu_blue">Max all (M)</button>
+                        <button class="gain_menu buttons" id="gain_menu_blue">Gain 0 green</button>
                 </div>
             </div>
         </div>
@@ -129,7 +128,8 @@
             <div class="center_color"></div>
         </div>
     </section>
-    <footer>
+    <section class="win_css default_text" id="win">YOU WIN</section>
+    <footer id="forwin1">
         <div class="settings">
             <button class="settings_buttons" onclick="save()">Save</button>
             <button class="settings_buttons" onclick="load()">Load</button>

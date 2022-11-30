@@ -282,3 +282,12 @@ footer {
 .opacity_sec_menu_num {
   font-size: 12px;
 }
+
+/* QWE*/
+.win_css {
+  display: none;
+  font-size: 100px;
+  margin: 20% 45%;
+  color: #ffffff;
+  text-align: center;
+}

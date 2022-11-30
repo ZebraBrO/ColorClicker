@@ -153,8 +153,8 @@ function hardReset() {
 
         document.getElementById("opacityGenSecond").style.display = x;
         document.getElementById("opacityGenFirst").style.display = "";
-        document.getElementById("redCount").innerHTML = "Red: " + Number(red);
-        document.getElementById("redCountMenu").innerHTML = "Red: " + Number(red);
+        document.getElementById("redCount").innerHTML = "Color: " + Number(red);                        /* Change color to red QWE*/
+        document.getElementById("redCountMenu").innerHTML = "Color: " + Number(red);                      /* ChangeX color to red QWE*/
         clearInterval(opacityTimerVar);
         opacityTimerVar = null;
         opacityTimer()
@@ -175,6 +175,8 @@ function save() {
     localStorage.setItem("OpacitySecGen3", OpacitySecGen3);
     localStorage.setItem("OpacitySecGen4", OpacitySecGen4);
     localStorage.setItem("OpacitySecGen5", OpacitySecGen5);
+
+    localStorage.setItem("bgColorRed", document.getElementById("mainColorRed").style.backgroundColor);
 
     localStorage.setItem("gen1", JSON.stringify(gen1));
     localStorage.setItem("gen2", JSON.stringify(gen2));
@@ -281,9 +283,10 @@ function load(){
         document.getElementById("Gen4").innerHTML = Number(gen4[1] * (gen4[2] ** gen4[4])).toFixed(3);
         document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
 
-        changeRgba("mainColorRed", 0, red);
-        document.getElementById("redCount").innerHTML = "Red: " + Number(red);
-        document.getElementById("redCountMenu").innerHTML = "Red: " + Number(red);
+        document.getElementById("mainColorRed").style.backgroundColor = localStorage.getItem("bgColorRed");
+
+        document.getElementById("redCount").innerHTML = "Color: " + Number(red);                        /* Change color to red QWE*/
+        document.getElementById("redCountMenu").innerHTML = "Color: " + Number(red);                      /* ChangeX color to red QWE*/
         if (gen1[4] > 0) {    
             document.getElementById("opacityGenSecond").style.display = "";
             document.getElementById("opacityGenFirst").style.display = x;
@@ -343,11 +346,11 @@ function reset() {
     document.getElementById("Gen4").innerHTML = Number(gen4[1] * (gen4[2] ** gen4[4])).toFixed(3);
     document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
 
-    document.getElementById("redCount").innerHTML = "Red: " + Number(red);
-    document.getElementById("redCountMenu").innerHTML = "Red: " + Number(red);
+    document.getElementById("redCount").innerHTML = "Color: " + Number(red);                        /* Change color to red QWE*/
+    document.getElementById("redCountMenu").innerHTML = "Color: " + Number(red);                      /* ChangeX color to red QWE*/
 
     opacityTimer();
-    
+    if (red >= 100) {buyFirstOpacityGen()}
 }
 
 function changeRgba(color, mode, value) {
@@ -359,15 +362,15 @@ function changeRgba(color, mode, value) {
         let blue = Number(rgba[2]);
         let opacity = Number(rgba[3]);
         if (mode == 0) {            // Change red
-            red = value;
+            red += value;
             document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
         } 
         else if (mode == 1) {       // Change green
-            green = value;
+            green += value;
             document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
         }
         else if (mode == 2) {       // Change blue
-            blue = value;
+            blue += value;
             document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
         }
         else if (mode == 3) {       //Change opacity
@@ -382,19 +385,19 @@ function changeRgba(color, mode, value) {
         let blue = Number(rgba[2]);
         let opacity = Number(rgba[3]);
         if (mode == 0) {            // Change red
-            red = value;
+            red += value;
             document.getElementById(color).style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
         } 
         else if (mode == 1) {       // Change green
-            green = value;
+            green += value;
             document.getElementById(color).style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
         }
         else if (mode == 2) {       // Change blue
-            blue = value;
+            blue += value;
             document.getElementById(color).style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
         }
         else if (mode == 3) {       //Change opacity
-            opacity = value;
+            opacity += value;
             document.getElementById(color).style.backgroundColor = "rgba(" + red + ", " + green + ", " + blue + ", " + opacity + ")";
         }
     }
@@ -458,7 +461,7 @@ function opacityTimer() {
     document.getElementById("opacitytext").innerHTML = "Opacity " + opacityToHTML;
     document.getElementById("opacitymenu").innerHTML = opacityToHTML.toFixed(0);
     document.getElementById("opacitySectext").innerHTML = "Opacity/sec " + opacitySec;
-    document.getElementById("opacitySecMenu").innerHTML = opacitySec;
+    document.getElementById("opacitySecMenu").innerHTML = opacitySec.toFixed(0);
     document.getElementById("opacitySecGen1").innerHTML = Math.round(OpacitySecGen1 * multipliers * 1000) / 1000;
     document.getElementById("opacitySecGen2").innerHTML = Math.round(OpacitySecGen2 * multipliers * 1000) / 1000;
     document.getElementById("opacitySecGen3").innerHTML = Math.round(OpacitySecGen3 * multipliers * 1000) / 1000;
@@ -468,14 +471,44 @@ function opacityTimer() {
         document.getElementById("gainbutton").innerHTML = "Gain 0 red";
     }
     else {
-        document.getElementById("gainbutton").innerHTML = "Gain " + toFixedNoRound(Math.log10(opacity)) + " red";
+        document.getElementById("gainbutton").innerHTML = "Gain " + toFixedNoRound(Math.log10(opacity)) + " color";                       /* Change red to color QWE*/
     }
     if (opacity < 10) {
         document.getElementById("gain_menu_red").innerHTML = "Gain 0 red";
     }
     else {
-        document.getElementById("gain_menu_red").innerHTML = "Gain " + toFixedNoRound(Math.log10(opacity)) + " red";
+        document.getElementById("gain_menu_red").innerHTML = "Gain " + toFixedNoRound(Math.log10(opacity)) + " color";                    /* Change red to color QWE*/
     }
+
+    if (document.getElementById("mainColorRed").style.backgroundColor == "rgb(255, 255, 255)") { 
+        clearInterval(opacityTimerVar);
+        opacityTimerVar = null;
+        clearInterval(opacitySecCheckVar);
+        opacitySecCheckVar = null;
+        clearInterval(opacityTotalCheck2Var);
+        opacityTotalCheck2Var = null;
+        clearInterval(opacityTotalCheck3Var);
+        opacityTotalCheck3Var = null;
+        clearInterval(opacityTotalCheck4Var);
+        opacityTotalCheck4Var = null;
+        clearInterval(opacityTotalCheck5Var);
+        opacityTotalCheck5Var = null;
+        clearInterval(forRedCheckVar);
+        forRedCheckVar = null;
+        clearInterval(forMenuCheckVar);
+        forMenuCheckVar = null;
+        clearInterval(forAutobuyersVar);
+        forAutobuyersVar = null;
+        clearInterval(redOpacityAutobuyerVar);
+        redOpacityAutobuyerVar = null;
+
+        tomenu(0);
+        document.getElementById("forwin0").style.display = x;
+        document.getElementById("forwin1").style.display = x;
+        document.getElementById("forwin2").style.backgroundColor = "black";
+        
+        document.getElementById("win").style.display = "flex";
+     } /*QWE*/
 }
 
 function opacitySecCheck() {
@@ -548,7 +581,7 @@ function gainRed() {
     if (opacity >= 10){
         red += toFixedNoRound(Math.log10(opacity));
         changeRgba("mainColorRed", 3, opacity);
-        changeRgba("mainColorRed", 0, red);
+        changeRgba("mainColorRed", getRandomInt(3), toFixedNoRound(Math.log10(opacity)));                   /* changeRgba("mainColorRed", 0, red); QWE*/
         reset()
     }
 }
@@ -577,7 +610,7 @@ function tomenu(mode) {
         document.getElementById("bluecolorsbuttons").style.display = "";
         document.getElementById("greencolorsbuttons").style.display = "";
         if (greenUnlocked == 1) {document.getElementById("menu_green").style.display = "";}
-        document.getElementById("menu_blue").style.display = "";
+        document.getElementById("menu_blue").style.display = x; /* BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE BLUE QWE*/
 
         document.getElementById("menu_red").style.display = "grid";
     }
@@ -628,9 +661,9 @@ function redOpacityAutobuyer() {
 
 function buyRedAutoBuyer(autobuyer, toHTML) {
     red = buy(autobuyer, red, toHTML);
-    changeRgba("mainColorRed", 0, red);
-    document.getElementById("redCount").innerHTML = "Red: " + Number(red);
-    document.getElementById("redCountMenu").innerHTML = "Red: " + Number(red);
+    changeRgba("mainColorRed", getRandomInt(3), -(toFixedNoRound(Math.log10(opacity))));                   /* changeRgba("mainColorRed", 0, red); QWE*/
+    document.getElementById("redCount").innerHTML = "Color: " + Number(red);                            /* Change color to red QWE*/
+    document.getElementById("redCountMenu").innerHTML = "Color: " + Number(red);                        /* ChangeX color to red QWE*/
     if (autobuyer == autobuyer1) {
         return buy(autobuyer, red, "RedGen0");
     }
@@ -664,4 +697,14 @@ function AutobyersCheckboxes(mode) {
 function toFixedNoRound(number, precition = 0) {
     let factor = Math.pow(10, precition);
     return Math.floor(number * factor) / factor;
+}
+
+
+
+
+/*QWE*/
+
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
