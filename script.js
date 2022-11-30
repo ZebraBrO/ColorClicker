@@ -71,6 +71,15 @@ var redOpacityAutobuyerVar = 0;
 
 var autoSave = setInterval(save, 300000);
 
+if (gen1[4] > 0) {    
+    document.getElementById("opacityGenSecond").style.display = "";
+    document.getElementById("opacityGenFirst").style.display = x;
+    if (document.getElementById("redAutobuyerCheckbox0").checked == true) {
+        document.getElementById("redAutobuyerCheckbox1").checked = true
+        document.getElementById("redAutobuyerCheckbox0").checked = false
+    }
+}
+
 if (localStorage.getItem("opacity") != null) {load();}
 
 function hardReset() {
@@ -132,6 +141,7 @@ function hardReset() {
         document.getElementById("opacityGenFirst").style.display = "";
         document.getElementById("redCount").innerHTML = "Red: " + Number(red);
         clearInterval(opacityTimerVar);
+        opacityTimerVar = null;
         opacityTimer()
     }
 }
@@ -169,15 +179,25 @@ function load(){
     }
     else {
         clearInterval(opacityTimerVar);
+        opacityTimerVar = null;
         clearInterval(opacitySecCheckVar);
+        opacitySecCheckVar = null;
         clearInterval(opacityTotalCheck2Var);
+        opacityTotalCheck2Var = null;
         clearInterval(opacityTotalCheck3Var);
+        opacityTotalCheck3Var = null;
         clearInterval(opacityTotalCheck4Var);
+        opacityTotalCheck4Var = null;
         clearInterval(opacityTotalCheck5Var);
+        opacityTotalCheck5Var = null;
         clearInterval(forRedCheckVar);
+        forRedCheckVar = null;
         clearInterval(forMenuCheckVar);
+        forMenuCheckVar = null;
         clearInterval(forAutobuyersVar);
+        forAutobuyersVar = null;
         clearInterval(redOpacityAutobuyerVar);
+        redOpacityAutobuyerVar = null;
 
 
         document.getElementById("statsred").style.display = x;
@@ -240,7 +260,20 @@ function load(){
 
         changeRgba("mainColorRed", 0, red);
         document.getElementById("redCount").innerHTML = "Red: " + Number(red);
+        if (gen1[4] > 0) {    
+            document.getElementById("opacityGenSecond").style.display = "";
+            document.getElementById("opacityGenFirst").style.display = x;
+            if (document.getElementById("redAutobuyerCheckbox0").checked == true) {
+                document.getElementById("redAutobuyerCheckbox1").checked = true
+                document.getElementById("redAutobuyerCheckbox0").checked = false
+            }
+        }
         opacityTimer();
+
+        if (opacitySec == 0) {
+            clearInterval(opacityTimerVar);
+            opacityTimerVar = null;
+        }
     }
 }
 
@@ -278,6 +311,7 @@ function reset() {
     }
 
     clearInterval(opacityTimerVar);
+    opacityTimerVar = null;
 
     document.getElementById("Gen1").innerHTML = Number(gen1[1] * (gen1[2] ** gen1[4])).toFixed(3);
     document.getElementById("Gen2").innerHTML = Number(gen2[1] * (gen2[2] ** gen2[4])).toFixed(3);
@@ -415,6 +449,7 @@ function opacitySecCheck() {
     if (opacitySec != 0) {
         document.getElementById("opacitySectext").style.visibility = "";
         clearInterval(opacitySecCheckVar);
+        opacitySecCheckVar = null;
     }
 }
 
@@ -422,24 +457,28 @@ function opacityTotalCheck2() {
     if (opacityTotal >= 0.060) {
         document.getElementById("opacityGen2").style.visibility = "";
         clearInterval(opacityTotalCheck2Var);
+        opacityTotalCheck2Var = null;
     }
 }
 function opacityTotalCheck3() {
     if (opacityTotal >= 0.720) {
         document.getElementById("opacityGen3").style.visibility = "";
         clearInterval(opacityTotalCheck3Var);
+        opacityTotalCheck3Var = null;
     }
 }
 function opacityTotalCheck4() {
     if (opacityTotal >= 8.640) {
         document.getElementById("opacityGen4").style.visibility = "";
         clearInterval(opacityTotalCheck4Var);
+        opacityTotalCheck4Var = null;
     }
 }
 function opacityTotalCheck5() {
     if (opacityTotal >= 103.680) {
         document.getElementById("opacityGen5").style.visibility = "";
         clearInterval(opacityTotalCheck5Var);
+        opacityTotalCheck5Var = null;
     }
 }
 
@@ -447,6 +486,7 @@ function forRedCheck() {
     if (opacity >= 10) {
         document.getElementById("gainbutton").style.visibility = "";
         clearInterval(forRedCheckVar);
+        forRedCheckVar = null;
     }
 }
 
@@ -454,6 +494,7 @@ function forMenuCheck() {
     if (red >= 255) {
         document.getElementById("backbutton").style.visibility = "";
         clearInterval(forMenuCheckVar);
+        forMenuCheckVar = null;
     }
 }
 
@@ -466,6 +507,7 @@ function forAutobuyers() {
         document.getElementById("autobuyerRedGen4Div").style.display = "";
         document.getElementById("autobuyerRedGen5Div").style.display = "";
         clearInterval(forAutobuyersVar);
+        forAutobuyersVar = null;
     }
 }
 
@@ -481,34 +523,42 @@ function gainRed() {
 function forRedCountMultiCheck() {
     if (red > 0) {
         document.getElementById("redCount").style.visibility = "";
-        clearInterval(forRedCountMultiCheck);
+        clearInterval(forRedCountMultiCheckVar);
+        forRedCountMultiCheckVar = null;
     }
 }
 
 function tomenu(mode) {
     if (mode == 0) {
-        
+        document.getElementById("upgradesandstats").style.display = x;
+        document.getElementById("gainbutton").style.display = x;
+        document.getElementById("backbutton").style.display = x;
+        document.getElementById("redCount").style.display = x;
+
+        document.getElementById("statsred").style.display = "";
+        document.getElementById("maincolorsstat").style.display = "";
+        document.getElementById("menu_green").style.display = "";
+        document.getElementById("menu_blue").style.display = "";
     }
 }
 
 function redOpacityAutobuyer() {
-    debugger
     if (document.getElementById("redAutobuyerCheckbox0").checked == true & autobuyer1[4] > 0) {
         buyFirstOpacityGen();
     }
-    if (document.getElementById("redAutobuyerCheckbox1").checked == true) {
+    if (document.getElementById("redAutobuyerCheckbox1").checked == true & autobuyer1[4] > 0) {
         opacity = autobuy(autobuyer1, gen1, opacity, "Gen1", "redAutobuyerCheckbox1");
     }
-    if (document.getElementById("redAutobuyerCheckbox2").checked == true) {
+    if (document.getElementById("redAutobuyerCheckbox2").checked == true & autobuyer2[4] > 0) {
         opacity = autobuy(autobuyer2, gen2, opacity, "Gen2", "redAutobuyerCheckbox2");
     }
-    if (document.getElementById("redAutobuyerCheckbox3").checked == true) {
+    if (document.getElementById("redAutobuyerCheckbox3").checked == true & autobuyer3[4] > 0) {
         opacity = autobuy(autobuyer3, gen3, opacity, "Gen3", "redAutobuyerCheckbox3");
     }
-    if (document.getElementById("redAutobuyerCheckbox4").checked == true) {
+    if (document.getElementById("redAutobuyerCheckbox4").checked == true & autobuyer4[4] > 0) {
         opacity = autobuy(autobuyer4, gen4, opacity, "Gen4", "redAutobuyerCheckbox4");
     }
-    if (document.getElementById("redAutobuyerCheckbox5").checked == true) {
+    if (document.getElementById("redAutobuyerCheckbox5").checked == true & autobuyer5[4] > 0) {
         opacity = autobuy(autobuyer5, gen5, opacity, "Gen5", "redAutobuyerCheckbox5");
     }
 }
