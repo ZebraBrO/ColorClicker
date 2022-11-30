@@ -15,33 +15,42 @@
         <div class="menu_colors" id="menu_red">
             <button class="gain_n_back_button buttons" id="backbutton" onclick="tomenu(0)" title="Main menu">To main</button>
             <div class="main_color_red" id="mainColorRed"></div>
-            <div class="red_info">
+            <div class="red_info" id="gainbutton1">
                 <button class="gain_n_back_button buttons" id="gainbutton" onclick="gainRed()" title="log10 of opacity">Gain 0 red</button>
                 <p class="red_count default_text" id="redCount">Red: 0</p>
             </div>
-            <div class="stats_main_colors stats_red" id="maincolorsstat">
-                <div class="main_colors_buttons">
-                    <button class="upgrade_form buttons" id="upgrade_form_red">Upgrades</button>
-                    <button class="max_all buttons" id="max_all_red">Max all (M)</button>
-                </div>
+            <div class="stats_main_colors stats_red" id="redcolorsstat">
+                <p class="opacity_menu default_text">Opacity: <p class="opacity_menu_num default_text" id="opacitymenu">0</p></p> 
+                <p class="opacity_sec_menu default_text">Opacity/sec: <p class="opacity_sec_menu_num default_text" id="opacitySecMenu">0</p></p>
+                <p class="red_count_menu default_text" id="redCountMenu">Red: 0</p> 
+                <p>
+                    <label class="default_text checkbox_text checkbox_menu" for="redAutobuyerCheckboxes">Toggle autobuyers</label>
+                    <input type="checkbox" id="redAutobuyerCheckboxes" onchange="AutobyersCheckboxes(0)">
+                </p>
+            </div>
+            <div class="main_colors_buttons" id="redcolorsbutton1">
+                <button class="upgrade_form buttons" id="upgrade_form_red" onclick="goback(0)">Upgrades</button>
+            </div>
+            <div class="main_colors_buttons" id="redcolorsbutton2">
+                <button class="gain_menu buttons" id="gain_menu_red" onclick="gainRed()">Max all (M)</button>
             </div>
         </div>
         <div class="menu_colors" id="menu_green">
-            <div class="main_color_green" id="maincolor2"></div>
-            <div class="stats_main_colors stats_green" id="maincolorsstat">
-                <div class="main_colors_buttons">
+            <div class="main_color_green" id="maincolorgreen"></div>
+            <div class="stats_main_colors stats_green" id="greencolorsstat">
+                <div class="main_colors_buttons" id="greencolorsbuttons">
                     <button class="upgrade_form buttons" id="upgrade_form_green">Upgrades</button>
-                    <button class="max_all buttons" id="max_all_green">Max all (M)</button>
+                    <button class="gain_menu buttons" id="gain_menu_green">Max all (M)</button>
                 </div>
             </div>
         </div>
         <div class="menu_colors" id="menu_blue">
-            <div class="main_color_blue" id="maincolor3"></div>
-            <div class="stats_main_colors stats_blue" id="maincolorsstat">
+            <div class="main_color_blue" id="maincolorblue"></div>
+            <div class="stats_main_colors stats_blue" id="bluecolorsstat">
                 <div id="stat1"></div>
-                <div class="main_colors_buttons">
+                <div class="main_colors_buttons" id="bluecolorsbuttons">
                         <button class="upgrade_form buttons" id="upgrade_form_blue">Upgrades</button>
-                        <button class="max_all buttons" id="max_all_blue">Max all (M)</button>
+                        <button class="gain_menu buttons" id="gain_menu_blue">Max all (M)</button>
                 </div>
             </div>
         </div>
@@ -56,7 +65,7 @@
                 <p class="num upgrades_default_text red_opacity_sec_gen">0</p>
                 <div class="autobuyer" id="autobuyerRedGen0Div">
                     <button class="buttons" id="autobuyerRedGen0" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer1, 'RedGen1')">Autobuyer<p id="RedGen0">Cost: 2</p></button>
-                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <label class="default_text checkbox_text" for="redAutobuyerCheckbox0">Toggle</label>
                     <input type="checkbox" id="redAutobuyerCheckbox0">
                 </div>
             </div>
@@ -66,7 +75,7 @@
                 <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen1">0</p>
                 <div class="autobuyer" id="autobuyerRedGen1Div">
                     <button class="buttons" id="autobuyerRedGen1" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer1, 'RedGen1')">Autobuyer<p id="RedGen1">Cost: 2</p></button>
-                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <label class="default_text checkbox_text" for="redAutobuyerCheckbox1">Toggle</label>
                     <input type="checkbox" id="redAutobuyerCheckbox1">
                 </div>
             </div>
@@ -76,7 +85,7 @@
                 <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen2">0</p>
                 <div class="autobuyer" id="autobuyerRedGen2Div">
                     <button class="buttons" id="autobuyerRedGen2" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer2, 'RedGen2')">Autobuyer<p id="RedGen2">Cost: 4</p></button>
-                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <label class="default_text checkbox_text" for="redAutobuyerCheckbox2">Toggle</label>
                     <input type="checkbox" id="redAutobuyerCheckbox2">
                 </div>
             </div>
@@ -86,7 +95,7 @@
                 <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen3">0</p>
                 <div class="autobuyer" id="autobuyerRedGen3Div">
                     <button class="buttons" id="autobuyerRedGen3" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer3, 'RedGen3')">Autobuyer<p id="RedGen3">Cost: 8</p></button>
-                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <label class="default_text checkbox_text" for="redAutobuyerCheckbox3">Toggle</label>
                     <input type="checkbox" id="redAutobuyerCheckbox3">
                 </div>
             </div>
@@ -96,7 +105,7 @@
                 <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen4">0</p>
                 <div class="autobuyer" id="autobuyerRedGen4Div">
                     <button class="buttons" id="autobuyerRedGen4" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer4, 'RedGen4')">Autobuyer<p id="RedGen4">Cost: 16</p></button>
-                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <label class="default_text checkbox_text" for="redAutobuyerCheckbox4">Toggle</label>
                     <input type="checkbox" id="redAutobuyerCheckbox4">
                 </div>
             </div>
@@ -106,7 +115,7 @@
                 <p class="num upgrades_default_text red_opacity_sec_gen" id="opacitySecGen5" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off">0</p>
                 <div class="autobuyer" id="autobuyerRedGen5Div">
                     <button class="buttons" id="autobuyerRedGen5" title="Automaticly buys 1 generators in 1 second. Can be toggled on/off" onclick="buyRedAutoBuyer(autobuyer5, 'RedGen5')">Autobuyer<p id="RedGen5">Cost: 32</p></button>
-                    <label class="default_text checkbox_text" for="toggle">Toggle</label>
+                    <label class="default_text checkbox_text" for="redAutobuyerCheckbox5">Toggle</label>
                     <input type="checkbox" id="redAutobuyerCheckbox5">
                 </div> 
             </div>            

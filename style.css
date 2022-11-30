@@ -119,25 +119,30 @@ body {
 }
 
 .menu_colors {
-  display: flex;
+  display:flex;
+  grid-template-columns: 250px 250px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .main_colors_buttons {
-  display: grid;
+  margin: 10px 15px;
 }
 
 .upgrade_form {
   font-family: 'Press Start 2P', cursive;
   font-size: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
+  width: 220px;
+  height: 50px;
 }
 
-.max_all {
+.gain_menu {
   font-family: 'Press Start 2P', cursive;
   font-size: 15px;
   margin-top: 10px;
+  width: 220px;
+  height: 50px;
 }
 
 .buttons {
@@ -260,4 +265,20 @@ footer {
 
 .red_opacity_sec_gen {
   width: 100px;
+}
+
+.stats_main_colors {
+  margin-left: 10px;
+}
+
+.checkbox_menu {
+  margin-left: 0px;
+}
+
+.opacity_menu_num {
+  font-size: 12px;
+}
+
+.opacity_sec_menu_num {
+  font-size: 12px;
 }

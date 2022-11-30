@@ -3,7 +3,13 @@ var y = "hidden"
 
 
 document.getElementById("statsred").style.display = x;
-document.getElementById("maincolorsstat").style.display = x;
+document.getElementById("redcolorsstat").style.display = x;
+document.getElementById("bluecolorsstat").style.display = x;
+document.getElementById("greencolorsstat").style.display = x;
+document.getElementById("redcolorsbutton1").style.display = x;
+document.getElementById("redcolorsbutton2").style.display = x;
+document.getElementById("bluecolorsbuttons").style.display = x;
+document.getElementById("greencolorsbuttons").style.display = x;
 document.getElementById("menu_green").style.display = x;
 document.getElementById("menu_blue").style.display = x;
 document.getElementById("gradientsection").style.display = x;
@@ -32,6 +38,7 @@ var opacitySec = 0;
 var opacityToHTML = 0;
 var red = 0;
 var blue = 0;
+var greenUnlocked = 0;
 var green = 0;
 
 var OpacitySecGen1 = 0;
@@ -85,7 +92,13 @@ if (localStorage.getItem("opacity") != null) {load();}
 function hardReset() {
     if (confirm("Are you sure? This will start the game from scratch") === true) {
         document.getElementById("statsred").style.display = x;
-        document.getElementById("maincolorsstat").style.display = x;
+        document.getElementById("redcolorsstat").style.display = x;
+        document.getElementById("bluecolorsstat").style.display = x;
+        document.getElementById("greencolorsstat").style.display = x;
+        document.getElementById("redcolorsbutton1").style.display = x;
+        document.getElementById("redcolorsbutton2").style.display = x;
+        document.getElementById("bluecolorsbuttons").style.display = x;
+        document.getElementById("greencolorsbuttons").style.display = x;
         document.getElementById("menu_green").style.display = x;
         document.getElementById("menu_blue").style.display = x;
         document.getElementById("gradientsection").style.display = x;
@@ -112,6 +125,7 @@ function hardReset() {
         opacityToHTML = 0;
         red = 0;
         blue = 0;
+        greenUnlocked = 0;
         green = 0;
         OpacitySecGen1 = 0;
         OpacitySecGen2 = 0;
@@ -140,6 +154,7 @@ function hardReset() {
         document.getElementById("opacityGenSecond").style.display = x;
         document.getElementById("opacityGenFirst").style.display = "";
         document.getElementById("redCount").innerHTML = "Red: " + Number(red);
+        document.getElementById("redCountMenu").innerHTML = "Red: " + Number(red);
         clearInterval(opacityTimerVar);
         opacityTimerVar = null;
         opacityTimer()
@@ -153,6 +168,7 @@ function save() {
     localStorage.setItem("opacityToHTML", opacityToHTML);
     localStorage.setItem("red", red);
     localStorage.setItem("blue", blue);
+    localStorage.setItem("greenUnlocked", greenUnlocked);
     localStorage.setItem("green", green);
     localStorage.setItem("OpacitySecGen1", OpacitySecGen1);
     localStorage.setItem("OpacitySecGen2", OpacitySecGen2);
@@ -201,7 +217,13 @@ function load(){
 
 
         document.getElementById("statsred").style.display = x;
-        document.getElementById("maincolorsstat").style.display = x;
+        document.getElementById("redcolorsstat").style.display = x;
+        document.getElementById("bluecolorsstat").style.display = x;
+        document.getElementById("greencolorsstat").style.display = x;
+        document.getElementById("redcolorsbutton1").style.display = x;
+        document.getElementById("redcolorsbutton2").style.display = x;
+        document.getElementById("bluecolorsbuttons").style.display = x;
+        document.getElementById("greencolorsbuttons").style.display = x;
         document.getElementById("menu_green").style.display = x;
         document.getElementById("menu_blue").style.display = x;
         document.getElementById("gradientsection").style.display = x;
@@ -221,6 +243,7 @@ function load(){
         opacityToHTML = Number(localStorage.getItem("opacityToHTML"));
         red = Number(localStorage.getItem("red"));
         blue = Number(localStorage.getItem("blue"));
+        greenUnlocked = Number(localStorage.getItem("greenUnlocked"));
         green = Number(localStorage.getItem("green"));
         OpacitySecGen1 = Number(localStorage.getItem("OpacitySecGen1"));
         OpacitySecGen2 = Number(localStorage.getItem("OpacitySecGen2"));
@@ -260,6 +283,7 @@ function load(){
 
         changeRgba("mainColorRed", 0, red);
         document.getElementById("redCount").innerHTML = "Red: " + Number(red);
+        document.getElementById("redCountMenu").innerHTML = "Red: " + Number(red);
         if (gen1[4] > 0) {    
             document.getElementById("opacityGenSecond").style.display = "";
             document.getElementById("opacityGenFirst").style.display = x;
@@ -320,6 +344,7 @@ function reset() {
     document.getElementById("Gen5").innerHTML = Number(gen5[1] * (gen5[2] ** gen5[4])).toFixed(3);
 
     document.getElementById("redCount").innerHTML = "Red: " + Number(red);
+    document.getElementById("redCountMenu").innerHTML = "Red: " + Number(red);
 
     opacityTimer();
     
@@ -431,7 +456,9 @@ function opacityTimer() {
     if (opacity >= 1) {changeRgba("mainColorRed", 3, 1);}
     else {changeRgba("mainColorRed", 3, opacity);}
     document.getElementById("opacitytext").innerHTML = "Opacity " + opacityToHTML;
+    document.getElementById("opacitymenu").innerHTML = opacityToHTML.toFixed(0);
     document.getElementById("opacitySectext").innerHTML = "Opacity/sec " + opacitySec;
+    document.getElementById("opacitySecMenu").innerHTML = opacitySec;
     document.getElementById("opacitySecGen1").innerHTML = Math.round(OpacitySecGen1 * multipliers * 1000) / 1000;
     document.getElementById("opacitySecGen2").innerHTML = Math.round(OpacitySecGen2 * multipliers * 1000) / 1000;
     document.getElementById("opacitySecGen3").innerHTML = Math.round(OpacitySecGen3 * multipliers * 1000) / 1000;
@@ -442,6 +469,12 @@ function opacityTimer() {
     }
     else {
         document.getElementById("gainbutton").innerHTML = "Gain " + toFixedNoRound(Math.log10(opacity)) + " red";
+    }
+    if (opacity < 10) {
+        document.getElementById("gain_menu_red").innerHTML = "Gain 0 red";
+    }
+    else {
+        document.getElementById("gain_menu_red").innerHTML = "Gain " + toFixedNoRound(Math.log10(opacity)) + " red";
     }
 }
 
@@ -531,14 +564,44 @@ function forRedCountMultiCheck() {
 function tomenu(mode) {
     if (mode == 0) {
         document.getElementById("upgradesandstats").style.display = x;
-        document.getElementById("gainbutton").style.display = x;
+        document.getElementById("gainbutton1").style.display = x;
         document.getElementById("backbutton").style.display = x;
         document.getElementById("redCount").style.display = x;
 
         document.getElementById("statsred").style.display = "";
-        document.getElementById("maincolorsstat").style.display = "";
-        document.getElementById("menu_green").style.display = "";
+        document.getElementById("redcolorsstat").style.display = "";
+        document.getElementById("bluecolorsstat").style.display = "";
+        document.getElementById("greencolorsstat").style.display = "";
+        document.getElementById("redcolorsbutton1").style.display = "";
+        document.getElementById("redcolorsbutton2").style.display = "";
+        document.getElementById("bluecolorsbuttons").style.display = "";
+        document.getElementById("greencolorsbuttons").style.display = "";
+        if (greenUnlocked == 1) {document.getElementById("menu_green").style.display = "";}
         document.getElementById("menu_blue").style.display = "";
+
+        document.getElementById("menu_red").style.display = "grid";
+    }
+}
+
+function goback(mode) {
+    if (mode == 0) {
+        document.getElementById("upgradesandstats").style.display = "";
+        document.getElementById("gainbutton1").style.display = "";
+        document.getElementById("backbutton").style.display = "";
+        document.getElementById("redCount").style.display = "";
+
+        document.getElementById("statsred").style.display = x;
+        document.getElementById("redcolorsstat").style.display = x;
+        document.getElementById("bluecolorsstat").style.display = x;
+        document.getElementById("greencolorsstat").style.display = x;
+        document.getElementById("redcolorsbutton1").style.display = x;
+        document.getElementById("redcolorsbutton2").style.display = x;
+        document.getElementById("bluecolorsbuttons").style.display = x;
+        document.getElementById("greencolorsbuttons").style.display = x;
+        document.getElementById("menu_green").style.display = x;
+        document.getElementById("menu_blue").style.display = x;
+
+        document.getElementById("menu_red").style.display = "";
     }
 }
 
@@ -567,6 +630,7 @@ function buyRedAutoBuyer(autobuyer, toHTML) {
     red = buy(autobuyer, red, toHTML);
     changeRgba("mainColorRed", 0, red);
     document.getElementById("redCount").innerHTML = "Red: " + Number(red);
+    document.getElementById("redCountMenu").innerHTML = "Red: " + Number(red);
     if (autobuyer == autobuyer1) {
         return buy(autobuyer, red, "RedGen0");
     }
@@ -575,6 +639,25 @@ function buyRedAutoBuyer(autobuyer, toHTML) {
 function autobuy(autobuyer, gen, money, toHTML, checkboxID) { /* autobuyer - array, money - currency used to autobuy */
 	for (let i = 0; i < autobuyer[4]; i++) {
         return buy(gen, money, toHTML);
+    }
+}
+
+function AutobyersCheckboxes(mode) {
+    if (mode == 0) {
+        if (document.getElementById("redAutobuyerCheckboxes").checked == true) {
+            document.getElementById("redAutobuyerCheckbox1").checked = true
+            document.getElementById("redAutobuyerCheckbox2").checked = true
+            document.getElementById("redAutobuyerCheckbox3").checked = true
+            document.getElementById("redAutobuyerCheckbox4").checked = true
+            document.getElementById("redAutobuyerCheckbox5").checked = true
+        }
+        else {
+            document.getElementById("redAutobuyerCheckbox1").checked = false
+            document.getElementById("redAutobuyerCheckbox2").checked = false
+            document.getElementById("redAutobuyerCheckbox3").checked = false
+            document.getElementById("redAutobuyerCheckbox4").checked = false
+            document.getElementById("redAutobuyerCheckbox5").checked = false
+        }
     }
 }
 
